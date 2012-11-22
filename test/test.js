@@ -22,9 +22,18 @@ describe('clone', function(){
     var b = clone(a);
     assert.equal(a, 1);
     assert.equal(b, 1);
-    a = 2;
+    a += 1;
     assert.equal(a, 2);
     assert.equal(b, 1);
+  });
+  it('should clone strings', function(){
+    var a = 'aaa';
+    var b = clone(a);
+    assert.equal(a, 'aaa');
+    assert.equal(b, 'aaa');
+    a += 'bbb';
+    assert.equal(a, 'aaabbb');
+    assert.equal(b, 'aaa');
   });
   it('should clone number objects', function(){
     var a = new Number(1);
@@ -74,5 +83,51 @@ describe('clone', function(){
     assert.equal(b.c, 1);
     assert.equal(b.getC(), 1);
     assert.equal(b.d, 2);
+  });
+  it('should clone Date instances', function(){
+    var a = new Date(1980,2,3,4,5,6);
+    var b = clone(a);
+    assert.equal(a.getFullYear(), 1980);
+    assert.equal(b.getFullYear(), 1980);
+    a.setFullYear(1981);
+    assert.equal(a.getFullYear(), 1981);
+    assert.equal(b.getFullYear(), 1980);
+  });
+  it('should clone RegExp instances', function(){
+    var a = new RegExp('a+', 'g');
+    var b = clone(a);
+    assert.ok(a instanceof RegExp);
+    assert.ok(b instanceof RegExp);
+    assert.equal(a.lastIndex, 0);
+    assert.equal(b.lastIndex, 0);
+    a.exec('bba');
+    assert.equal(a.lastIndex, 3);
+    assert.equal(b.lastIndex, 0);
+  });
+  it('should clone Arguments', function(){
+    function getargs() { return arguments; };
+    var a = getargs(1, 2, 3);
+    var b = clone(a);
+    assert.deepEqual(a, getargs(1, 2, 3));
+    assert.deepEqual(b, getargs(1, 2, 3));
+    a[0] = 4;
+    assert.deepEqual(a, getargs(4, 2, 3));
+    assert.deepEqual(b, getargs(1, 2, 3));
+  });
+  it('should clone Functions', function(){
+    var a = function(a, b, c) {};
+    var b = clone(a);
+    assert.equal(a.toString(), b.toString());
+  });
+  it('should clone closures', function(){
+    var generator = function () { var i = 0; return function() { return ++i; }; };
+    var a = generator();
+    assert.equal(a(), 1);
+    assert.equal(a(), 2);
+    var b = clone(a);
+    assert.equal(a(), 3);
+    assert.equal(a(), 4);
+    assert.equal(b(), 5);
+    assert.equal(b(), 6);
   });
 });

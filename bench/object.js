@@ -1,4 +1,5 @@
 var Benchmark = require('benchmark');
+var assert = require('assert');
 
 // obj1: 5 sting keys and values
 obj1 = {'a': 'a', 'b': 'b', 'c': 'c', 'd': 'd', 'e': 'e'};
@@ -18,14 +19,23 @@ for (var i = 0; i < 1000; i++) {
   obj4[i] = i;
 }
 
+arr1 = [1, 2, 3, 4, 5];
+arr2 = [];
+for (var i = 0; i < 1000; i++) {
+  arr2.push(i);
+}
+
 // node-v8-clone
 clone = require('..').clone;
+assert.deepEqual(obj1, clone(obj1));
 
 // regular for(var i in obj) cloner
 regular = function(obj) { var result = {}; for(var i in obj) result[i] = obj[i]; return result; };
+assert.deepEqual(obj1, regular(obj1));
 
 // regular cloner with own checks
 regular_own = function(obj) { var result = {}; for(var i in obj) if (obj.hasOwnProperty(i)) result[i] = obj[i]; return result; };
+assert.deepEqual(obj1, regular_own(obj1));
 
 // static cloner
 function createStatic(obj) {
@@ -40,6 +50,7 @@ static1 = createStatic(obj1);
 static2 = createStatic(obj2);
 static3 = createStatic(obj3);
 static4 = createStatic(obj4);
+assert.deepEqual(obj1, static1(obj1));
 
 var suite = new Benchmark.Suite;
 suite.on('cycle', function(event) {
@@ -48,6 +59,7 @@ suite.on('cycle', function(event) {
 suite.on('complete', function() {
   console.log('Fastest is ' + this.filter('fastest').pluck('name'));
 });
+
 suite.add('obj1 regular cloner',       'regular(obj1)');
 suite.add('obj1 regular own cloner',   'regular_own(obj1)');
 suite.add('obj1 static cloner',        'static1(obj1)');
