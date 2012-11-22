@@ -20,7 +20,7 @@ suite.on('complete', function() {
   console.log('Fastest is ' + this.filter('fastest').pluck('name'));
 });
 
-suite.add('date date_clone',           'date_clone(date)');
-suite.add('date node-v8-clone cloner', 'clone(date)');
+suite.add('date new Date(+date) cloner', 'date_clone(date)');
+suite.add('date node-v8-clone cloner  ', 'clone(date)');
 
 suite.run({ 'async': true });

@@ -60,24 +60,24 @@ suite.on('complete', function() {
   console.log('Fastest is ' + this.filter('fastest').pluck('name'));
 });
 
-suite.add('obj1 regular cloner',       'regular(obj1)');
-suite.add('obj1 regular own cloner',   'regular_own(obj1)');
-suite.add('obj1 static cloner',        'static1(obj1)');
-suite.add('obj1 node-v8-clone cloner', 'clone(obj1)');
+suite.add('obj1 for in               ', 'regular(obj1)');
+suite.add('obj1 for in hasOwnProperty', 'regular_own(obj1)');
+suite.add('obj1 static cloner        ', 'static1(obj1)');
+suite.add('obj1 node-v8-clone cloner ', 'clone(obj1)');
 
-suite.add('obj2 regular cloner',       'regular(obj2)');
-suite.add('obj2 regular own cloner',   'regular_own(obj2)');
-suite.add('obj2 static cloner',        'static2(obj2)');
-suite.add('obj2 node-v8-clone cloner', 'clone(obj2)');
+suite.add('obj2 for in               ', 'regular(obj2)');
+suite.add('obj2 for in hasOwnProperty', 'regular_own(obj2)');
+suite.add('obj2 static cloner        ', 'static2(obj2)');
+suite.add('obj2 node-v8-clone cloner ', 'clone(obj2)');
 
-suite.add('obj3 regular cloner',       'regular(obj3)');
-suite.add('obj3 regular own cloner',   'regular_own(obj3)');
-suite.add('obj3 static cloner',        'static3(obj3)');
-suite.add('obj3 node-v8-clone cloner', 'clone(obj3)');
+suite.add('obj3 for in               ', 'regular(obj3)');
+suite.add('obj3 for in hasOwnProperty', 'regular_own(obj3)');
+suite.add('obj3 static cloner        ', 'static3(obj3)');
+suite.add('obj3 node-v8-clone cloner ', 'clone(obj3)');
 
-suite.add('obj4 regular cloner',       'regular(obj4)');
-suite.add('obj4 regular own cloner',   'regular_own(obj4)');
-suite.add('obj4 static cloner',        'static4(obj4)');
-suite.add('obj4 node-v8-clone cloner', 'clone(obj4)');
+suite.add('obj4 for in               ', 'regular(obj4)');
+suite.add('obj4 for in hasOwnProperty', 'regular_own(obj4)');
+suite.add('obj4 static cloner        ', 'static4(obj4)');
+suite.add('obj4 node-v8-clone cloner ', 'clone(obj4)');
 
 suite.run({ 'async': true });

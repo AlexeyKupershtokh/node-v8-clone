@@ -38,16 +38,16 @@ suite.on('complete', function() {
   console.log('Fastest is ' + this.filter('fastest').pluck('name'));
 });
 
-suite.add('arr1 arr_for',              'arr_for(arr1)');
-suite.add('arr1 arr_for2',             'arr_for2(arr1)');
-suite.add('arr1 arr_for_in',           'arr_for_in(arr1)');
-suite.add('arr1 arr_for_in_has',       'arr_for_in_has(arr1)');
-suite.add('arr1 node-v8-clone cloner', 'clone(arr1)');
+suite.add('arr1 []       for i < l i++', 'arr_for(arr1)');
+suite.add('arr1 Array(l) for i < l i++', 'arr_for2(arr1)');
+suite.add('arr1 for in                ', 'arr_for_in(arr1)');
+suite.add('arr1 for in hasOwnProperty ', 'arr_for_in_has(arr1)');
+suite.add('arr1 node-v8-clone cloner  ', 'clone(arr1)');
 
-suite.add('arr2 arr_for',              'arr_for(arr2)');
-suite.add('arr2 arr_for2',             'arr_for2(arr2)');
-suite.add('arr2 arr_for_in',           'arr_for_in(arr2)');
-suite.add('arr2 arr_for_in_has',       'arr_for_in_has(arr2)');
-suite.add('arr2 node-v8-clone cloner', 'clone(arr2)');
+suite.add('arr2 []       for i < l i++', 'arr_for(arr2)');
+suite.add('arr2 Array(l) for i < l i++', 'arr_for2(arr2)');
+suite.add('arr2 for in                ', 'arr_for_in(arr2)');
+suite.add('arr2 for in hasOwnProperty ', 'arr_for_in_has(arr2)');
+suite.add('arr2 node-v8-clone cloner  ', 'clone(arr2)');
 
 suite.run({ 'async': true });
