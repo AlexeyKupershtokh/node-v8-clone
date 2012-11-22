@@ -1,14 +1,21 @@
 var Benchmark = require('benchmark');
 
-obj1 = {'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5};
+// obj1: 5 sting keys and values
+obj1 = {'a': 'a', 'b': 'b', 'c': 'c', 'd': 'd', 'e': 'e'};
+
+// obj2: 5 integer keys and values
 obj2 = {1: 1, 2: 2, 3: 3, 4: 4, 5: 5};
+
+// obj3: 1000 string keys and values
 obj3 = {};
 for (var i = 0; i < 1000; i++) {
-  obj3[i] = i;
+  obj4['_' + i] = '_' + i;
 }
+
+// obj4: 1000 integer keys and values
 obj4 = {};
 for (var i = 0; i < 1000; i++) {
-  obj4['_' + i] = '_' + i;
+  obj3[i] = i;
 }
 
 // node-v8-clone
