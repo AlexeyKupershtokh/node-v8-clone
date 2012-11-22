@@ -1,10 +1,10 @@
 {
   "name": "node-v8-clone",
   "version": "0.1.0",
-  "description": "Exposed v8 clone function for node.js",
+  "description": "UNSTABLE yet. Exposed v8 clone function for node.js.",
   "main": "build/Release/clone",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "install": "node-gyp rebuild"
   },
   "repository": {
