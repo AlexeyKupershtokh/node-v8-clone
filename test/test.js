@@ -56,4 +56,23 @@ describe('clone', function(){
     assert.equal(b[0], 1);
     assert.equal(b[1], 2);
   });
+  it('should clone instances', function(){
+    function clazz (c) { this.c = c; this.d = 2 };
+    clazz.prototype.getC = function() { return this.c; };
+    var a = new clazz(1);
+    var b = clone(a);
+    assert.equal(a.c, 1);
+    assert.equal(a.getC(), 1);
+    assert.equal(a.d, 2);
+    assert.equal(b.c, 1);
+    assert.equal(b.getC(), 1);
+    assert.equal(b.d, 2);
+    a.c = 3;
+    assert.equal(a.c, 3);
+    assert.equal(a.getC(), 3);
+    assert.equal(a.d, 2);
+    assert.equal(b.c, 1);
+    assert.equal(b.getC(), 1);
+    assert.equal(b.d, 2);
+  });
 });
