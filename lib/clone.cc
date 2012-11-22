@@ -6,9 +6,12 @@ using namespace v8;
 Handle<Value> Clone(const Arguments& args) {
   HandleScope scope;
 
-  Handle<Object> obj = Handle<Object>::Cast(args[0]);
-
-  return scope.Close(obj->Clone());
+  if (args[0]->IsObject()) {
+    Handle<Object>obj = Handle<Object>::Cast(args[0]);
+    return scope.Close(obj->Clone());
+  } else {
+    return args[0];
+  }
 }
 
 void Init(Handle<Object> target) {

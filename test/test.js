@@ -7,17 +7,32 @@ describe('clone', function(){
     var b = clone(a);
     assert.equal(a, null);
     assert.equal(b, null);
+    a = true;
+    assert.equal(a, true);
+    assert.equal(b, null);
   });
   it('should clone undefined', function(){
-    var a = null;
+    var a = undefined;
     var b = clone(a);
-    assert.equal(a, null);
-    assert.equal(b, null);
+    assert.equal(a, undefined);
+    assert.equal(b, undefined);
   });
   it('should clone numbers', function(){
     var a = 1;
     var b = clone(a);
     assert.equal(a, 1);
+    assert.equal(b, 1);
+    a = 2;
+    assert.equal(a, 2);
+    assert.equal(b, 1);
+  });
+  it('should clone number objects', function(){
+    var a = new Number(1);
+    var b = clone(a);
+    assert.equal(a, 1);
+    assert.equal(b, 1);
+    a = new Number(2);
+    assert.equal(a, 2);
     assert.equal(b, 1);
   });
   it('should clone objects', function(){

@@ -4,7 +4,7 @@
   "description": "UNSTABLE yet. Exposed v8 clone function for node.js.",
   "main": "build/Release/clone",
   "scripts": {
-    "test": "mocha",
+    "test": "mocha || node_modules/.bin/mocha",
     "install": "node-gyp rebuild"
   },
   "repository": {
@@ -20,6 +20,7 @@
   "gypfile": true,
   "readmeFilename": "README.md",
   "devDependencies": {
-    "benchmark": "~1.0.0"
+    "benchmark": "~1.0.0",
+    "mocha": "~1.7.0"
   }
 }
