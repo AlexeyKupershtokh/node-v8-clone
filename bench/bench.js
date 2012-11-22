@@ -1,1 +1,1 @@
-/home/wicked/Alawar/node-v8-clone/bench/object.js
+object.js
