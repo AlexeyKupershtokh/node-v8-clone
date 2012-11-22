@@ -1,4 +1,4 @@
 node-v8-clone
 =============
 
-Exposed v8 clone function for node.js.
+Expose v8 shallow clone function for node.js.
