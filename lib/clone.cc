@@ -1,4 +1,4 @@
-//#define BUILDING_NODE_EXTENSION
+#define BUILDING_NODE_EXTENSION
 #include <node.h>
 
 using namespace v8;
