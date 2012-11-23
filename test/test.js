@@ -51,6 +51,11 @@ describe('clone', function(){
     assert.equal(a.y, 2);
     assert.equal(b.x, 1);
     assert.equal(b.y, 2);
+    a.x = 3;
+    assert.equal(a.x, 3);
+    assert.equal(a.y, 2);
+    assert.equal(b.x, 1);
+    assert.equal(b.y, 2);
   });
   it('should clone arrays', function(){
     var a = [1, 2];
