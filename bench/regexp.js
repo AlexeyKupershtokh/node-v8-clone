@@ -1,5 +1,6 @@
 var Benchmark = require('benchmark');
 var assert = require('assert');
+try { _ = require('lodash'); } catch (e) {};
 
 // RegExp
 re = new RegExp('a', 'gi');
@@ -30,6 +31,7 @@ suite.on('complete', function() {
 
 suite.add('RegExp new RegExp(re.source, /\w*$/.exec(re))   ', 're_clone(re)');
 suite.add('RegExp new RegExp(re.source, "g"? + "i"? + "m"?)', 're_clone2(re)');
+suite.add('RegExp lodash _.clone                           ', '_.clone(re, false)');
 suite.add('RegExp node-v8-clone cloner                     ', 'clone(re)');
 
 suite.run({ 'async': true });

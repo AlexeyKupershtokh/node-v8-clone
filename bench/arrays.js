@@ -1,5 +1,6 @@
 var Benchmark = require('benchmark');
 var assert = require('assert');
+try { _ = require('lodash'); } catch (e) {};
 
 // array of 5 numeric elements
 arr1 = [1, 2, 3, 4, 5];
@@ -42,12 +43,14 @@ suite.add('arr1 []       for i < l i++', 'arr_for(arr1)');
 suite.add('arr1 Array(l) for i < l i++', 'arr_for2(arr1)');
 suite.add('arr1 for in                ', 'arr_for_in(arr1)');
 suite.add('arr1 for in hasOwnProperty ', 'arr_for_in_has(arr1)');
+suite.add('arr1 lodash _.clone        ', '_.clone(arr1, false)');
 suite.add('arr1 node-v8-clone cloner  ', 'clone(arr1)');
 
 suite.add('arr2 []       for i < l i++', 'arr_for(arr2)');
 suite.add('arr2 Array(l) for i < l i++', 'arr_for2(arr2)');
 suite.add('arr2 for in                ', 'arr_for_in(arr2)');
 suite.add('arr2 for in hasOwnProperty ', 'arr_for_in_has(arr2)');
+suite.add('arr2 lodash _.clone        ', '_.clone(arr2, false)');
 suite.add('arr2 node-v8-clone cloner  ', 'clone(arr2)');
 
 suite.run({ 'async': true });

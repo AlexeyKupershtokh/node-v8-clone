@@ -1,5 +1,6 @@
 var Benchmark = require('benchmark');
 var assert = require('assert');
+try { _ = require('lodash'); } catch (e) {};
 
 // clazz
 Clazz = function(a, b, c, d) {
@@ -35,8 +36,8 @@ suite.on('complete', function() {
   console.log('Fastest is ' + this.filter('fastest').pluck('name'));
 });
 
-suite.add('Clazz new Clazz(5, 6, 7, 8) ', 'var inst2 = new Clazz(5, 6, 7, 8);');
-suite.add('Clazz new Clazz(5, 6, 7, 8)+', 'var inst2 = new Clazz(1, 2, 3, 4); inst.constructor(5, 6, 7, 8)');
-suite.add('Clazz node-v8-clone cloner  ', 'var inst2 = clone(inst); inst.constructor(5, 6, 7, 8)');
+suite.add('Clazz new Clazz(5, 6, 7, 8) ', 'var inst2 = new Clazz(1, 2, 3, 4);');
+suite.add('Clazz lodash _.clone        ', 'var inst2 = _.clone(inst, false);');
+suite.add('Clazz node-v8-clone cloner  ', 'var inst2 = clone(inst);');
 
 suite.run({ 'async': true });

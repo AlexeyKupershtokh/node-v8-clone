@@ -1,5 +1,6 @@
 var Benchmark = require('benchmark');
 var assert = require('assert');
+try { _ = require('lodash'); } catch (e) {};
 
 // Date
 date = new Date;
@@ -21,6 +22,7 @@ suite.on('complete', function() {
 });
 
 suite.add('date new Date(+date) cloner', 'date_clone(date)');
+suite.add('date lodash _.clone        ', '_.clone(date, false)');
 suite.add('date node-v8-clone cloner  ', 'clone(date)');
 
 suite.run({ 'async': true });
