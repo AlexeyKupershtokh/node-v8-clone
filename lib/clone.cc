@@ -4,14 +4,13 @@
 using namespace v8;
 
 Handle<Value> Clone(const Arguments& args) {
-  HandleScope scope;
-
-  if (args[0]->IsObject()) {
-    Handle<Object>obj = Handle<Object>::Cast(args[0]);
+  Handle<Value>arg = args[0];
+  if (arg->IsObject()/* && !arg->IsBooleanObject() && !arg->IsStringObject() && !arg->IsNumberObject() */) {
+    Handle<Object>obj = Handle<Object>::Cast(arg);
+    HandleScope scope;
     return scope.Close(obj->Clone());
-  } else {
-    return args[0];
   }
+  return arg;
 }
 
 void Init(Handle<Object> target) {
