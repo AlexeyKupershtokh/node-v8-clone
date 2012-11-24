@@ -26,6 +26,18 @@ describe('clone', function(){
     assert.equal(a, 2);
     assert.equal(b, 1);
   });
+  it('should clone number objects', function(){
+    var a = new Number(1);
+    var b = clone(a);
+    assert.equal(a, 1);
+    assert.equal(b, 1);
+    assert.equal(a, 1);
+    assert.equal(b, 1);
+
+    a.myprop = 2;
+    assert.equal(a.myprop, 2);
+    assert.equal(b.myprop, undefined);
+  });
   it('should clone strings', function(){
     var a = 'aaa';
     var b = clone(a);
@@ -35,14 +47,17 @@ describe('clone', function(){
     assert.equal(a, 'aaabbb');
     assert.equal(b, 'aaa');
   });
-  it('should clone number objects', function(){
-    var a = new Number(1);
+  it('should clone strings objects', function(){
+    var a = new String('aaa');
     var b = clone(a);
-    assert.equal(a, 1);
-    assert.equal(b, 1);
-    a = new Number(2);
-    assert.equal(a, 2);
-    assert.equal(b, 1);
+    assert.equal(a, 'aaa');
+    assert.equal(b, 'aaa');
+    assert.equal(a, 'aaa');
+    assert.equal(b, 'aaa');
+
+    a.myprop = 2;
+    assert.equal(a.myprop, 2);
+    assert.equal(b.myprop, undefined);
   });
   it('should clone objects', function(){
     var a = {x : 1, y: 2};
@@ -97,6 +112,10 @@ describe('clone', function(){
     a.setFullYear(1981);
     assert.equal(a.getFullYear(), 1981);
     assert.equal(b.getFullYear(), 1980);
+
+    a.myprop = 2;
+    assert.equal(a.myprop, 2);
+    assert.equal(b.myprop, undefined);
   });
   it('should clone RegExp instances', function(){
     var a = new RegExp('a+', 'g');
@@ -108,6 +127,10 @@ describe('clone', function(){
     a.exec('bba');
     assert.equal(a.lastIndex, 3);
     assert.equal(b.lastIndex, 0);
+
+    a.myprop = 2;
+    assert.equal(a.myprop, 2);
+    assert.equal(b.myprop, undefined);
   });
   it('should clone Arguments', function(){
     function getargs() { return arguments; };

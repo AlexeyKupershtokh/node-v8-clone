@@ -2,9 +2,9 @@
   "name": "node-v8-clone",
   "version": "0.1.3",
   "description": "UNSTABLE yet. Exposed v8 clone function for node.js.",
-  "main": "build/Release/clone",
+  "main": "lib/clone.js",
   "scripts": {
-    "test": "mocha || node_modules/.bin/mocha",
+    "test": "node_modules/.bin/mocha",
     "install": "node-gyp rebuild"
   },
   "repository": {
@@ -19,9 +19,11 @@
   "license": "BSD",
   "gypfile": true,
   "readmeFilename": "README.md",
+  "dependencies": {
+    "lodash": "*"
+  },
   "devDependencies": {
     "benchmark": "~1.0.0",
-    "mocha": "~1.7.0",
-    "lodash": "*"
+    "mocha": "~1.7.0"
   }
 }
