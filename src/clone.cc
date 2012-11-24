@@ -18,8 +18,8 @@ Handle<Value> _DeepClone(Handle<Value> value, Local<Object> stackMapA, Local<Obj
     HandleScope scope;
     Handle<Object> obj = Handle<Object>::Cast(value);
 
+    // handle repeated items
     unsigned int hash = obj->GetIdentityHash();
-
     Local<Value> stackMapAValue = stackMapA->Get(hash);
     Local<Array> stackMapAArr;
     Local<Array> stackMapBArr;
@@ -40,6 +40,7 @@ Handle<Value> _DeepClone(Handle<Value> value, Local<Object> stackMapA, Local<Obj
     }
     stackMapAArr->Set(stackMapAArr->Length(), value);
 
+    // clone arrays
     if (value->IsArray()) {
       Handle<Array> cloned = Handle<Array>::Cast(obj->Clone());
       stackMapBArr->Set(stackMapBArr->Length(), cloned);
@@ -51,6 +52,8 @@ Handle<Value> _DeepClone(Handle<Value> value, Local<Object> stackMapA, Local<Obj
       }
       return scope.Close(cloned);
     }
+
+    // clone other objects
     Handle<Object> cloned = obj->Clone();
     stackMapBArr->Set(stackMapBArr->Length(), cloned);
     Local<Array> props = cloned->GetOwnPropertyNames();
