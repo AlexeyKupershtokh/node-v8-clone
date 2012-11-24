@@ -5,6 +5,7 @@
   "main": "lib/clone.js",
   "scripts": {
     "test": "node_modules/.bin/mocha",
+    "benchmark": "node bench/arrays.js; node bench/class.js; node bench/date.js; node bench/deep.js; node bench/number.js; node bench/object.js; node bench/regexp.js",
     "install": "node-gyp rebuild"
   },
   "repository": {
