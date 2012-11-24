@@ -13,28 +13,52 @@ Handle<Value> Clone(const Arguments& args) {
   return arg;
 }
 
-Handle<Value> _DeepClone(Handle<Value> value) {
+Handle<Value> _DeepClone(Handle<Value> value, Local<Object> stackMapA, Local<Object> stackMapB) {
   if (value->IsObject()) {
     HandleScope scope;
+    Handle<Object> obj = Handle<Object>::Cast(value);
+
+    unsigned int hash = obj->GetIdentityHash();
+
+    Local<Value> stackMapAValue = stackMapA->Get(hash);
+    Local<Array> stackMapAArr;
+    Local<Array> stackMapBArr;
+    if (stackMapAValue->IsArray()) {
+      stackMapAArr = stackMapAValue.As<Array>();
+      stackMapBArr = stackMapA->Get(hash).As<Array>();
+      for (unsigned int j = 0; j < stackMapAArr->Length(); j++) {
+        Local<Value> stack = stackMapAArr->Get(j);
+        if (stack->StrictEquals(value)) {
+          return stackMapB->Get(hash).As<Array>()->Get(j);
+        }
+      }
+    } else {
+      stackMapAArr = Array::New();
+      stackMapBArr = Array::New();
+      stackMapA->Set(hash, stackMapAArr);
+      stackMapB->Set(hash, stackMapBArr);
+    }
+    stackMapAArr->Set(stackMapAArr->Length(), value);
+
     if (value->IsArray()) {
-      Handle<Object> obj = Handle<Object>::Cast(value);
       Handle<Array> cloned = Handle<Array>::Cast(obj->Clone());
+      stackMapBArr->Set(stackMapBArr->Length(), cloned);
       for (unsigned int i = 0; i < cloned->Length(); i++) {
         Local<Value> v = cloned->Get(i);
         if (v->IsObject()) {
-          cloned->Set(i, _DeepClone(v));
+          cloned->Set(i, _DeepClone(v, stackMapA, stackMapB));
         }
       }
       return scope.Close(cloned);
     }
-    Handle<Object> obj = Handle<Object>::Cast(value);
     Handle<Object> cloned = obj->Clone();
+    stackMapBArr->Set(stackMapBArr->Length(), cloned);
     Local<Array> props = cloned->GetOwnPropertyNames();
     for(unsigned int i = 0; i < props->Length(); i++) {
       Local<Value> key(props->Get(Integer::New(i)));
       Local<Value> v = cloned->Get(key);
       if (v->IsObject()) {
-        cloned->Set(key, _DeepClone(v));
+        cloned->Set(key, _DeepClone(v, stackMapA, stackMapB));
       }
     }
     return scope.Close(cloned);
@@ -43,7 +67,7 @@ Handle<Value> _DeepClone(Handle<Value> value) {
 }
 
 Handle<Value> DeepClone(const Arguments& args) {
-  return _DeepClone(args[0]);
+  return _DeepClone(args[0], Object::New(), Object::New());
 }
 
 void Init(Handle<Object> target) {

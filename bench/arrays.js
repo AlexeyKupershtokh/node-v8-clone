@@ -43,6 +43,7 @@ suite.on('complete', function() {
   console.log('Fastest is ' + this.filter('fastest').pluck('name'));
 });
 
+suite.add('arr1 slice()                ', 'arr1.slice()');
 suite.add('arr1 []       for i < l i++ ', 'arr_for(arr1)');
 suite.add('arr1 Array(l) for i < l i++ ', 'arr_for2(arr1)');
 suite.add('arr1 for in                 ', 'arr_for_in(arr1)');
@@ -51,6 +52,7 @@ suite.add('arr1 lodash _.clone         ', '_.clone(arr1, false)');
 suite.add('arr1 node-v8-clone js cloner', 'clone(arr1, false)');
 suite.add('arr1 node-v8-clone cloner   ', 'v8_clone(arr1)');
 
+suite.add('arr2 slice()                ', 'arr2.slice()');
 suite.add('arr2 []       for i < l i++ ', 'arr_for(arr2)');
 suite.add('arr2 Array(l) for i < l i++ ', 'arr_for2(arr2)');
 suite.add('arr2 for in                 ', 'arr_for_in(arr2)');
