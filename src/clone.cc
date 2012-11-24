@@ -15,7 +15,18 @@ Handle<Value> Clone(const Arguments& args) {
 
 Handle<Value> _DeepClone(Handle<Value> value) {
   if (value->IsObject()) {
-
+    HandleScope scope;
+    if (value->IsArray()) {
+      Handle<Object> obj = Handle<Object>::Cast(value);
+      Handle<Array> cloned = Handle<Array>::Cast(obj->Clone());
+      for (unsigned int i = 0; i < cloned->Length(); i++) {
+        Local<Value> v = cloned->Get(i);
+        if (v->IsObject()) {
+          cloned->Set(i, _DeepClone(v));
+        }
+      }
+      return scope.Close(cloned);
+    }
     Handle<Object> obj = Handle<Object>::Cast(value);
     Handle<Object> cloned = obj->Clone();
     Local<Array> props = cloned->GetOwnPropertyNames();
@@ -26,7 +37,6 @@ Handle<Value> _DeepClone(Handle<Value> value) {
         cloned->Set(key, _DeepClone(v));
       }
     }
-    HandleScope scope;
     return scope.Close(cloned);
   }
   return value;
