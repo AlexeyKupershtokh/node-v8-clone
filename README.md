@@ -17,10 +17,18 @@ Usage:
 ```javascript
 var clone = require('node-v8-clone').clone;
 var a = { x: { y: {} } };
-var b = clone(a, true); // deep clone
+
+// deep clone
+var b = clone(a, true);
 a === b // false
 a.x === b.x // false
 a.x.y === b.x.y // false
+
+// shallow clone
+c = clone(a, false);
+a === c // false
+a.x === c.x // true
+a.x.y === c.x.y // true
 ```
 
 Benchmark results
