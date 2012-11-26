@@ -2,7 +2,26 @@ node-v8-clone
 =============
 [![Build Status](https://secure.travis-ci.org/AlexeyKupershtokh/node-v8-clone.png?branch=master)](https://travis-ci.org/AlexeyKupershtokh/node-v8-clone)
 
-Expose v8 shallow clone function for node.js.
+It's a c++ addon for node.js that does the most accurate cloning for node.js.
+It's also very fast in some cases (benchmarks inside).
+
+Installation:
+=============
+Tested on node.js versions 0.4, 0.6. 0.8 and 0.9.
+```
+npm install node-v8-clone
+```
+
+Usage:
+======
+```javascript
+var clone = require('node-v8-clone').clone;
+var a = { x: { y: {} } };
+var b = clone(a, true);
+a === b // false
+a.x === b.x // false
+a.x.y === b.x.y // false
+```
 
 Benchmark results
 =================
