@@ -65,6 +65,24 @@ describe('v8_deepclone()', function(){
     assert.ok(a !== b);
     assert.ok(a.x !== a.y);
   });
+  it('should deep clone closures, but with a shared context', function() {
+    var f = function() {
+      var i = 0;
+      return function() {
+        return ++i;
+      }
+    };
+
+    // closure
+    var a = f();
+
+    assert.equal(a(), 1);
+    assert.equal(a(), 2);
+    var b = v8_deepclone(a);
+    assert.ok(a !== b);
+    assert.equal(a(), 3);
+    assert.equal(b(), 4);
+  });
 });
 describe('clone()', function(){
   it('should deep clone plain objects', function(){
@@ -128,5 +146,23 @@ describe('clone()', function(){
     assert.deepEqual(a.x, b.x);
     assert.ok(a !== b);
     assert.ok(a.x !== a.y);
+  });
+  it('should deep clone closures, but with a shared context', function() {
+    var f = function() {
+      var i = 0;
+      return function() {
+        return ++i;
+      }
+    };
+
+    // closure
+    var a = f();
+
+    assert.equal(a(), 1);
+    assert.equal(a(), 2);
+    var b = clone(a, true);
+    assert.ok(a !== b);
+    assert.equal(a(), 3);
+    assert.equal(b(), 4);
   });
 });
