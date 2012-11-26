@@ -33,7 +33,7 @@ a.x.y === c.x.y // true
 
 Benchmark results
 =================
-Object cloning:
+Object shallow cloning:
 ```
 obj1 = {a: 'a', b: 'b', c: 'c', d: 'd', e: 'e'}
 obj1 for in                   x    810,922 ops/sec ±1.31% (88 runs sampled)
@@ -59,7 +59,7 @@ obj4 for in hasOwnProperty    x     2,544 ops/sec ±1.62% (91 runs sampled)
 obj4 lodash _.clone           x     5,407 ops/sec ±2.49% (82 runs sampled)
 obj4 node-v8-clone js cloner  x   359,146 ops/sec ±2.70% (87 runs sampled)
 ```
-Array cloning:
+Array shallow cloning:
 ```
 arr1 = [1, 2, 3, 4, 5]
 arr1 slice()                 x  8,230,013 ops/sec ±2.86% (91 runs sampled)
@@ -79,14 +79,14 @@ arr2 for in hasOwnProperty   x      3,967 ops/sec ±0.92% (93 runs sampled)
 arr2 lodash _.clone          x    413,365 ops/sec ±1.09% (93 runs sampled)
 arr2 node-v8-clone js cloner x    493,603 ops/sec ±0.59% (94 runs sampled)
 ```
-RegExp cloning:
+RegExp shallow cloning:
 ```
 RegExp new RegExp(re.source, /\w*$/.exec(re))    x 1,004,526 ops/sec ±2.53% (91 runs sampled)
 RegExp new RegExp(re.source, "g"? + "i"? + "m"?) x 3,550,976 ops/sec ±3.00% (90 runs sampled)
 RegExp lodash _.clone                            x 1,119,311 ops/sec ±1.79% (85 runs sampled)
 RegExp node-v8-clone js cloner                   x 5,000,977 ops/sec ±1.33% (94 runs sampled)
 ```
-Date cloning:
+Date shallow cloning:
 ```
 date new Date(+date) cloner x 2,657,488 ops/sec ±2.52% (87 runs sampled)
 date lodash _.clone         x 1,185,187 ops/sec ±1.63% (93 runs sampled)
