@@ -36,58 +36,59 @@ Benchmark results
 Object cloning:
 ```
 obj1 = {a: 'a', b: 'b', c: 'c', d: 'd', e: 'e'}
-obj1 for in                x    554,737 ops/sec ±1.35% (80 runs sampled)
-obj1 for in hasOwnProperty x    390,519 ops/sec ±1.46% (93 runs sampled)
-obj1 lodash _.clone        x    221,200 ops/sec ±0.80% (92 runs sampled)
-obj1 node-v8-clone cloner  x  4,818,032 ops/sec ±1.81% (88 runs sampled)
+obj1 for in                   x    810,922 ops/sec ±1.31% (88 runs sampled)
+obj1 for in hasOwnProperty    x    572,086 ops/sec ±0.94% (91 runs sampled)
+obj1 lodash _.clone           x    364,218 ops/sec ±0.91% (89 runs sampled)
+obj1 node-v8-clone js cloner  x  5,230,347 ops/sec ±2.01% (91 runs sampled)
 
 obj2 = {1: 1, 2: 2, 3: 3, 4: 4, 5: 5}
-obj2 for in                x    422,927 ops/sec ±1.21% (90 runs sampled)
-obj2 for in hasOwnProperty x    299,434 ops/sec ±0.97% (91 runs sampled)
-obj2 lodash _.clone        x    254,220 ops/sec ±0.78% (90 runs sampled)
-obj2 node-v8-clone cloner  x  3,922,297 ops/sec ±0.97% (89 runs sampled)
+obj2 for in                   x   493,469 ops/sec ±1.79% (86 runs sampled)
+obj2 for in hasOwnProperty    x   385,693 ops/sec ±1.53% (86 runs sampled)
+obj2 lodash _.clone           x   400,466 ops/sec ±2.88% (92 runs sampled)
+obj2 node-v8-clone js cloner  x 3,676,889 ops/sec ±2.58% (88 runs sampled)
 
 obj3 = {_0: '_0', _1: '_1', ..., _999: '_999' }
-obj3 for in                x      1,277 ops/sec ±1.02% (93 runs sampled)
-obj3 for in hasOwnProperty x      1,091 ops/sec ±1.25% (89 runs sampled)
-obj3 lodash _.clone        x      1,613 ops/sec ±0.54% (87 runs sampled)
-obj3 node-v8-clone cloner  x     19,278 ops/sec ±0.77% (86 runs sampled)
+obj3 for in                   x     1,542 ops/sec ±2.34% (84 runs sampled)
+obj3 for in hasOwnProperty    x       940 ops/sec ±1.26% (91 runs sampled)
+obj3 lodash _.clone           x     2,112 ops/sec ±1.12% (93 runs sampled)
+obj3 node-v8-clone js cloner  x    40,405 ops/sec ±2.58% (94 runs sampled)
 
 obj4 = {0: 0, 1: 1, 2: 2, ..., 998: 998, 999: 999 }
-obj4 for in                x      3,493 ops/sec ±0.94% (89 runs sampled)
-obj4 for in hasOwnProperty x      1,854 ops/sec ±1.12% (86 runs sampled)
-obj4 lodash _.clone        x      4,223 ops/sec ±0.77% (87 runs sampled)
-obj4 node-v8-clone cloner  x    175,836 ops/sec ±0.59% (93 runs sampled)
+obj4 for in                   x     4,431 ops/sec ±2.43% (86 runs sampled)
+obj4 for in hasOwnProperty    x     2,544 ops/sec ±1.62% (91 runs sampled)
+obj4 lodash _.clone           x     5,407 ops/sec ±2.49% (82 runs sampled)
+obj4 node-v8-clone js cloner  x   359,146 ops/sec ±2.70% (87 runs sampled)
 ```
 Array cloning:
 ```
 arr1 = [1, 2, 3, 4, 5]
-arr1 []       for i < l i++ x  4,967,530 ops/sec ±1.20% (88 runs sampled)
-arr1 Array(l) for i < l i++ x 14,920,448 ops/sec ±1.66% (84 runs sampled)
-arr1 for in                 x    639,140 ops/sec ±1.08% (91 runs sampled)
-arr1 for in hasOwnProperty  x    430,562 ops/sec ±1.21% (90 runs sampled)
-arr1 lodash _.clone         x  1,065,184 ops/sec ±0.86% (93 runs sampled)
-arr1 node-v8-clone cloner   x  4,905,732 ops/sec ±1.11% (89 runs sampled)
+arr1 slice()                 x  8,230,013 ops/sec ±2.86% (91 runs sampled)
+arr1 []       for i < l i++  x  7,816,764 ops/sec ±2.50% (82 runs sampled)
+arr1 Array(l) for i < l i++  x 22,090,328 ops/sec ±1.36% (88 runs sampled)
+arr1 for in                  x    816,995 ops/sec ±1.50% (91 runs sampled)
+arr1 for in hasOwnProperty   x    499,472 ops/sec ±2.83% (87 runs sampled)
+arr1 lodash _.clone          x  1,520,163 ops/sec ±1.76% (84 runs sampled)
+arr1 node-v8-clone js cloner x  5,105,788 ops/sec ±2.07% (90 runs sampled)
 
 arr2 = [0, 1, 2, ..., 998, 999]
-arr2 []       for i < l i++ x     70,299 ops/sec ±1.25% (88 runs sampled)
-arr2 Array(l) for i < l i++ x    126,915 ops/sec ±1.05% (82 runs sampled)
-arr2 for in                 x      6,528 ops/sec ±1.06% (87 runs sampled)
-arr2 for in hasOwnProperty  x      3,103 ops/sec ±0.83% (89 runs sampled)
-arr2 lodash _.clone         x    201,249 ops/sec ±0.73% (97 runs sampled)
-arr2 node-v8-clone cloner   x    224,291 ops/sec ±0.99% (93 runs sampled)
-
+arr2 slice()                 x    522,115 ops/sec ±0.93% (95 runs sampled)
+arr2 []       for i < l i++  x    120,464 ops/sec ±1.55% (90 runs sampled)
+arr2 Array(l) for i < l i++  x    269,733 ops/sec ±1.39% (91 runs sampled)
+arr2 for in                  x      7,908 ops/sec ±1.91% (93 runs sampled)
+arr2 for in hasOwnProperty   x      3,967 ops/sec ±0.92% (93 runs sampled)
+arr2 lodash _.clone          x    413,365 ops/sec ±1.09% (93 runs sampled)
+arr2 node-v8-clone js cloner x    493,603 ops/sec ±0.59% (94 runs sampled)
 ```
 RegExp cloning:
 ```
-RegExp new RegExp(re.source, /w*$/.exec(re))     x   603,999 ops/sec ±0.88% (92 runs sampled)
-RegExp new RegExp(re.source, "g"? + "i"? + "m"?) x 2,721,745 ops/sec ±1.04% (92 runs sampled)
-RegExp lodash _.clone                            x   803,133 ops/sec ±0.80% (85 runs sampled)
-RegExp node-v8-clone cloner                      x 4,881,923 ops/sec ±0.90% (85 runs sampled)
+RegExp new RegExp(re.source, /\w*$/.exec(re))    x 1,004,526 ops/sec ±2.53% (91 runs sampled)
+RegExp new RegExp(re.source, "g"? + "i"? + "m"?) x 3,550,976 ops/sec ±3.00% (90 runs sampled)
+RegExp lodash _.clone                            x 1,119,311 ops/sec ±1.79% (85 runs sampled)
+RegExp node-v8-clone js cloner                   x 5,000,977 ops/sec ±1.33% (94 runs sampled)
 ```
 Date cloning:
 ```
-date new Date(+date) cloner x 3,228,313 ops/sec ±1.18% (91 runs sampled)
-date lodash _.clone         x   828,106 ops/sec ±0.78% (87 runs sampled)
-date node-v8-clone cloner   x 4,790,220 ops/sec ±0.87% (88 runs sampled)
+date new Date(+date) cloner x 2,657,488 ops/sec ±2.52% (87 runs sampled)
+date lodash _.clone         x 1,185,187 ops/sec ±1.63% (93 runs sampled)
+date node-v8-clone cloner   x 5,147,363 ops/sec ±0.98% (93 runs sampled)
 ```
