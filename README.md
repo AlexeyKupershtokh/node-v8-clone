@@ -17,7 +17,7 @@ Usage:
 ```javascript
 var clone = require('node-v8-clone').clone;
 var a = { x: { y: {} } };
-var b = clone(a, true);
+var b = clone(a, true); // deep clone
 a === b // false
 a.x === b.x // false
 a.x.y === b.x.y // false
