@@ -25,7 +25,7 @@ a.x === b.x // false
 a.x.y === b.x.y // false
 
 // shallow clone
-c = clone(a, false);
+var c = clone(a, false);
 a === c // false
 a.x === c.x // true
 a.x.y === c.x.y // true
