@@ -1,5 +1,5 @@
 var assert = require('assert');
-var Cloner = require('../lib/clone2.js').Cloner;
+var Cloner = require('..').Cloner;
 var shared = require('./shared.js');
 
 describe('new Cloner(false)', function(){
