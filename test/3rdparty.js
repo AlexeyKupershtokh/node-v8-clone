@@ -1,5 +1,6 @@
 var assert = require('assert');
 var lodash = require('lodash');
+var _ = require('underscore');
 var shared = require('./shared.js');
 var cloneextend = require('cloneextend');
 var clone = require('clone');
@@ -44,4 +45,13 @@ describe('clone()', function(){
   shared.behavesAsShallow();
   shared.behavesAsDeep();
   shared.behavesAsDeepWCircular();
+});
+
+describe('underscore.clone(value)', function(){
+  beforeEach(function(){
+    this.clone = function(value) {
+      return _.clone(value, true);
+    };
+  });
+  shared.behavesAsShallow();
 });
