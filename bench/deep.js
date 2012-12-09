@@ -1,6 +1,8 @@
 var Benchmark = require('benchmark');
 var assert = require('assert');
-try { _ = require('lodash'); } catch (e) {};
+try { _ = require('lodash'); } catch (e) { console.warn('lodash module is not installed'); };
+try { clone = require('clone'); } catch(e) { console.warn('clone module is not installed'); };
+try { cloneextend = require('cloneextend'); } catch(e) { console.warn('cloneextend module is not installed'); };
 
 // deep1: 5 sting keys and values
 deep1 = {a: 'a', b: {c: 'c', d: 'd', e: 'e'}, f: 'f'};
@@ -32,13 +34,9 @@ for (var i = 0; i < 1000; i++) {
   };
 }
 
-// node-v8-clone js
-clone = require('..').clone;
-assert.deepEqual(deep1, clone(deep1));
-
-// node-v8-clone
-v8_deepclone = require('..').v8_deepclone;
-assert.deepEqual(deep1, v8_deepclone(deep1));
+// cloner
+var Cloner = require('..').Cloner;
+cloner = new Cloner(true);
 
 var suite = new Benchmark.Suite;
 suite.on('cycle', function(event) {
@@ -49,20 +47,23 @@ suite.on('complete', function() {
 });
 
 suite.add('deep1 lodash _.clone          ', '_.clone(deep1, true)');
-suite.add('deep1 node-v8-clone js cloner ', 'clone(deep1, true)');
-suite.add('deep1 node-v8-clone cloner    ', 'v8_deepclone(deep1)');
+suite.add('deep1 clone                   ', 'clone(deep1)');
+suite.add('deep1 cloneextend.clone       ', 'cloneextend.clone(deep1)');
+suite.add('deep1 node-v8-clone cloner    ', 'cloner.clone(deep1)');
 
 suite.add('deep2 lodash _.clone          ', '_.clone(deep2, true)');
-suite.add('deep2 node-v8-clone js cloner ', 'clone(deep2, true)');
-suite.add('deep2 node-v8-clone cloner    ', 'v8_deepclone(deep2)');
+suite.add('deep2 clone                   ', 'clone(deep2)');
+suite.add('deep2 cloneextend.clone       ', 'cloneextend.clone(deep2)');
+suite.add('deep2 node-v8-clone cloner    ', 'cloner.clone(deep2)');
 
 suite.add('deep3 lodash _.clone          ', '_.clone(deep3, true)');
-suite.add('deep3 node-v8-clone js cloner ', 'clone(deep3, true)');
-suite.add('deep3 node-v8-clone cloner    ', 'v8_deepclone(deep3)');
+suite.add('deep3 clone                   ', 'clone(deep3)');
+suite.add('deep3 cloneextend.clone       ', 'cloneextend.clone(deep3)');
+suite.add('deep3 node-v8-clone cloner    ', 'cloner.clone(deep3)');
 
 suite.add('deep4 lodash _.clone          ', '_.clone(deep4, true)');
-suite.add('deep4 node-v8-clone js cloner ', 'clone(deep4, true)');
-suite.add('deep4 node-v8-clone cloner    ', 'v8_deepclone(deep4)');
-
+suite.add('deep4 clone                   ', 'clone(deep4)');
+suite.add('deep4 cloneextend.clone       ', 'cloneextend.clone(deep4)');
+suite.add('deep4 node-v8-clone cloner    ', 'cloner.clone(deep4)');
 
 suite.run({ 'async': true });

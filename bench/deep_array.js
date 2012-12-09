@@ -1,6 +1,8 @@
 var Benchmark = require('benchmark');
 var assert = require('assert');
-try { _ = require('lodash'); } catch (e) {};
+try { _ = require('lodash'); } catch (e) { console.warn('lodash module is not installed'); };
+try { clone = require('clone'); } catch(e) { console.warn('clone module is not installed'); };
+try { cloneextend = require('cloneextend'); } catch(e) { console.warn('cloneextend module is not installed'); };
 
 // deeparr1: 5 string keys and values
 deeparr1 = ['a', ['b', 'c', 'd'], 'e'];
@@ -17,13 +19,11 @@ for (var i = 0; i < 1000; i++) {
   ];
 }
 
-// node-v8-clone js
-clone = require('..').clone;
-assert.deepEqual(deeparr1, clone(deeparr1));
-
 // node-v8-clone
-v8_deepclone = require('..').v8_deepclone;
-assert.deepEqual(deeparr1, v8_deepclone(deeparr1));
+var Cloner = require('..').Cloner;
+cloner1 = new Cloner(true);
+cloner2 = new Cloner(true, true, { 'Array': Cloner.deep_array });
+cloner3 = new Cloner(true, false, { 'Array': Cloner.deep_array });
 
 var suite = new Benchmark.Suite;
 suite.on('cycle', function(event) {
@@ -34,11 +34,17 @@ suite.on('complete', function() {
 });
 
 suite.add('deeparr1 lodash _.clone          ', '_.clone(deeparr1, true)');
-suite.add('deeparr1 node-v8-clone js cloner ', 'clone(deeparr1, true)');
-suite.add('deeparr1 node-v8-clone cloner    ', 'v8_deepclone(deeparr1)');
+suite.add('deeparr1 clone                   ', 'clone(deeparr1)');
+suite.add('deeparr1 cloneextend.clone       ', 'cloneextend.clone(deeparr1)');
+suite.add('deeparr1 cloner1                 ', 'cloner1.clone(deeparr1)');
+suite.add('deeparr1 cloner2                 ', 'cloner2.clone(deeparr1)');
+suite.add('deeparr1 cloner3                 ', 'cloner3.clone(deeparr1)');
 
 suite.add('deeparr2 lodash _.clone          ', '_.clone(deeparr2, true)');
-suite.add('deeparr2 node-v8-clone js cloner ', 'clone(deeparr2, true)');
-suite.add('deeparr2 node-v8-clone cloner    ', 'v8_deepclone(deeparr2)');
+suite.add('deeparr2 clone                   ', 'clone(deeparr2)');
+suite.add('deeparr2 cloneextend.clone       ', 'cloneextend.clone(deeparr2)');
+suite.add('deeparr2 cloner1                 ', 'cloner1.clone(deeparr2)');
+suite.add('deeparr2 cloner2                 ', 'cloner2.clone(deeparr2)');
+suite.add('deeparr2 cloner3                 ', 'cloner3.clone(deeparr2)');
 
 suite.run({ 'async': true });
