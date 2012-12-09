@@ -13,7 +13,7 @@ for (var i = 0; i < 1000; i++) {
 
 // node-v8-clone js
 var Cloner = require('..').Cloner;
-var cloner = new Cloner(false);
+cloner = new Cloner(false);
 
 // array 'for (var i = 0; i < l; i++)' cloner
 arr_for = function(arr) { var result = []; for (var i = 0, l = arr.length; i < l; i++) result.push(arr[i]); return result; }

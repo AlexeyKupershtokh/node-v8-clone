@@ -6,8 +6,9 @@ try { _ = require('lodash'); } catch (e) {};
 date = new Date;
 
 // node-v8-clone
-clone = require('..').clone;
-assert.deepEqual(date, clone(date));
+var Cloner = require('..').Cloner;
+cloner = new Cloner(false);
+assert.deepEqual(date, cloner.clone(date));
 
 // date 'new Date(date)' cloner
 date_clone = function(date) { return new Date(+date); }
@@ -23,6 +24,6 @@ suite.on('complete', function() {
 
 suite.add('date new Date(+date) cloner', 'date_clone(date)');
 suite.add('date lodash _.clone        ', '_.clone(date, false)');
-suite.add('date node-v8-clone cloner  ', 'clone(date)');
+suite.add('date node-v8-clone cloner  ', 'cloner.clone(date)');
 
 suite.run({ 'async': true });

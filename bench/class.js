@@ -18,7 +18,7 @@ assert.equal(inst.d, 4);
 
 // node-v8-clone js
 var Cloner = require('..').Cloner;
-var cloner = new Cloner(false);
+cloner = new Cloner(false);
 
 var inst2 = clone(inst);
 inst2.constructor(5, 6, 7 ,8)
