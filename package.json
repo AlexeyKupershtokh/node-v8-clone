@@ -1,6 +1,6 @@
 {
   "name": "node-v8-clone",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "UNSTABLE yet. Exposed v8 clone function for node.js.",
   "main": "lib/clone.js",
   "scripts": {
