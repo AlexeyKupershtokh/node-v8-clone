@@ -17,13 +17,8 @@ assert.equal(inst.c, 3);
 assert.equal(inst.d, 4);
 
 // node-v8-clone js
-clone = require('..').clone;
-assert.deepEqual(inst, clone(inst));
-
-// node-v8-clone
-v8_clone = require('..').v8_clone;
-assert.deepEqual(inst, v8_clone(inst));
-
+var Cloner = require('..').Cloner;
+var cloner = new Cloner(false);
 
 var inst2 = clone(inst);
 inst2.constructor(5, 6, 7 ,8)
@@ -41,9 +36,8 @@ suite.on('complete', function() {
   console.log('Fastest is ' + this.filter('fastest').pluck('name'));
 });
 
-suite.add('Clazz new Clazz(5, 6, 7, 8)  ', 'var inst2 = new Clazz(1, 2, 3, 4);');
-suite.add('Clazz lodash _.clone         ', 'var inst2 = _.clone(inst, false);');
-suite.add('Clazz node-v8-clone js cloner', 'var inst2 = clone(inst, false);');
-suite.add('Clazz node-v8-clone cloner   ', 'var inst2 = v8_clone(inst);');
+suite.add('Clazz new Clazz(5, 6, 7, 8)', 'var inst2 = new Clazz(1, 2, 3, 4);');
+suite.add('Clazz lodash _.clone       ', 'var inst2 = _.clone(inst, false);');
+suite.add('Clazz node-v8-clone cloner ', 'var inst2 = cloner.clone(inst);');
 
 suite.run({ 'async': true });
