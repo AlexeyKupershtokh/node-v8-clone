@@ -255,7 +255,7 @@ a.tar span {
 a.npm,
 a.npm span {
   background: transparent url(../images/npm20.png) no-repeat 0 0;
-  width: 30px;
+  width: 51px;
   height: 21px;
   opacity: 0.8;
   display: inline-block;
@@ -280,6 +280,7 @@ a.code {
 
 a.zip:hover,
 a.tar:hover,
+a.npm:hover,
 a.code:hover {
   opacity: 1;
   -moz-opacity: 1;
