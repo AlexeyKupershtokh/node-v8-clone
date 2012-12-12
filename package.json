@@ -30,6 +30,7 @@
     "cloneextend": "*",
     "clone": "*",
     "lodash": "*",
+    "underscore": "*",
     "benchmark.js-plot": "*",
     "owl-deepcopy": "*"
   }
