@@ -1,0 +1,163 @@
+<!doctype html>
+<!-- The Time Machine GitHub pages theme was designed and developed by Jon Rohan, on Feb 7, 2012. -->
+<!-- Follow him for fun. http://twitter.com/jonrohan. Tail his code on http://github.com/jonrohan -->
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <link rel="stylesheet" href="stylesheets/stylesheet.css" media="screen"/>
+  <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script type="text/javascript" src="javascripts/script.js"></script>
+
+  <title>Node-v8-clone</title>
+  <meta name="description" content="A c++ addon for node.js that does the most accurate cloning for node.js.">
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <header>
+      <h1 class="title">Node-v8-clone</h1>
+    </header>
+    <div id="container">
+      <p class="tagline">A c++ addon for node.js that does the most accurate cloning for node.js.</p>
+      <div id="main" role="main">
+        <div class="download-bar">
+        <div class="inner">
+          <a href="https://github.com/AlexeyKupershtokh/node-v8-clone/tarball/master" class="download-button tar"><span>Download</span></a>
+          <a href="https://github.com/AlexeyKupershtokh/node-v8-clone/zipball/master" class="download-button zip"><span>Download</span></a>
+          <a href="https://github.com/AlexeyKupershtokh/node-v8-clone" class="code">View Node-v8-clone on GitHub</a>
+        </div>
+        <span class="blc"></span><span class="trc"></span>
+        </div>
+        <article class="markdown-body">
+          <h1>node-v8-clone</h1>
+
+<p><a href="https://travis-ci.org/AlexeyKupershtokh/node-v8-clone"><img src="https://secure.travis-ci.org/AlexeyKupershtokh/node-v8-clone.png?branch=master" alt="Build Status"></a></p>
+
+<p>It's a c++ addon for node.js that does the most accurate cloning for node.js.
+It's also very fast in some cases (benchmarks inside).</p>
+
+<h1>Installation:</h1>
+
+<p>Tested on node.js versions 0.4, 0.6. 0.8 and 0.9.
+You may be asked to install <code>make</code> and <code>g++</code> as well.</p>
+
+<pre><code>npm install node-v8-clone
+</code></pre>
+
+<h1>Usage:</h1>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">clone</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-v8-clone'</span><span class="p">).</span><span class="nx">clone</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">x</span><span class="o">:</span> <span class="p">{</span> <span class="nx">y</span><span class="o">:</span> <span class="p">{}</span> <span class="p">}</span> <span class="p">};</span>
+
+<span class="c1">// deep clone</span>
+<span class="kd">var</span> <span class="nx">b</span> <span class="o">=</span> <span class="nx">clone</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+<span class="nx">a</span> <span class="o">===</span> <span class="nx">b</span> <span class="c1">// false</span>
+<span class="nx">a</span><span class="p">.</span><span class="nx">x</span> <span class="o">===</span> <span class="nx">b</span><span class="p">.</span><span class="nx">x</span> <span class="c1">// false</span>
+<span class="nx">a</span><span class="p">.</span><span class="nx">x</span><span class="p">.</span><span class="nx">y</span> <span class="o">===</span> <span class="nx">b</span><span class="p">.</span><span class="nx">x</span><span class="p">.</span><span class="nx">y</span> <span class="c1">// false</span>
+
+<span class="c1">// shallow clone</span>
+<span class="kd">var</span> <span class="nx">c</span> <span class="o">=</span> <span class="nx">clone</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+<span class="nx">a</span> <span class="o">===</span> <span class="nx">c</span> <span class="c1">// false</span>
+<span class="nx">a</span><span class="p">.</span><span class="nx">x</span> <span class="o">===</span> <span class="nx">c</span><span class="p">.</span><span class="nx">x</span> <span class="c1">// true</span>
+<span class="nx">a</span><span class="p">.</span><span class="nx">x</span><span class="p">.</span><span class="nx">y</span> <span class="o">===</span> <span class="nx">c</span><span class="p">.</span><span class="nx">x</span><span class="p">.</span><span class="nx">y</span> <span class="c1">// true</span>
+</pre></div>
+
+<h1>Benchmark results</h1>
+
+<p>Object shallow cloning:</p>
+
+<pre><code>obj1 = {a: 'a', b: 'b', c: 'c', d: 'd', e: 'e'}
+obj1 for in                   x   828,849 ops/sec ±0.45% (97 runs sampled)
+obj1 for in hasOwnProperty    x   584,575 ops/sec ±1.12% (92 runs sampled)
+obj1 for Object.keys          x 1,074,931 ops/sec ±0.46% (100 runs sampled)
+obj1 lodash _.clone           x   383,463 ops/sec ±0.68% (94 runs sampled)
+obj1 node-v8-clone cloner     x 5,503,537 ops/sec ±0.61% (93 runs sampled)
+
+
+obj2 = {1: 1, 2: 2, 3: 3, 4: 4, 5: 5}
+obj2 for in                   x   553,909 ops/sec ±0.63% (90 runs sampled)
+obj2 for in hasOwnProperty    x   404,802 ops/sec ±0.42% (97 runs sampled)
+obj2 for Object.keys          x 1,031,865 ops/sec ±0.67% (90 runs sampled)
+obj2 lodash _.clone           x   419,223 ops/sec ±0.50% (95 runs sampled)
+obj2 node-v8-clone cloner     x 4,560,158 ops/sec ±0.93% (92 runs sampled)
+
+obj3 = {_0: '_0', _1: '_1', ..., _999: '_999' }
+obj3 for in                   x     1,701 ops/sec ±0.59% (98 runs sampled)
+obj3 for in hasOwnProperty    x     1,428 ops/sec ±0.62% (94 runs sampled)
+obj3 for Object.keys          x     4,863 ops/sec ±0.59% (93 runs sampled)
+obj3 lodash _.clone           x     2,136 ops/sec ±0.65% (97 runs sampled)
+obj3 node-v8-clone cloner     x    40,657 ops/sec ±1.16% (92 runs sampled)
+
+obj4 = {0: 0, 1: 1, 2: 2, ..., 998: 998, 999: 999 }
+obj4 for in                   x     4,332 ops/sec ±0.53% (100 runs sampled)
+obj4 for in hasOwnProperty    x     2,477 ops/sec ±0.58% (93 runs sampled)
+obj4 for Object.keys          x    13,546 ops/sec ±0.61% (92 runs sampled)
+obj4 lodash _.clone           x     5,905 ops/sec ±0.61% (98 runs sampled)
+obj4 node-v8-clone cloner     x   372,176 ops/sec ±0.74% (93 runs sampled)
+</code></pre>
+
+<p>Array shallow cloning:</p>
+
+<pre><code>arr1 = [1, 2, 3, 4, 5]
+arr1 slice()                 x  9,171,117 ops/sec ±0.71% (89 runs sampled)
+arr1 []       for i &lt; l i++  x  7,521,757 ops/sec ±0.79% (93 runs sampled)
+arr1 Array(l) for i &lt; l i++  x 19,521,981 ops/sec ±1.65% (81 runs sampled)
+arr1 for in                  x    843,917 ops/sec ±0.61% (96 runs sampled)
+arr1 for in hasOwnProperty   x    553,712 ops/sec ±0.47% (99 runs sampled)
+arr1 lodash _.clone          x  1,826,144 ops/sec ±0.72% (96 runs sampled)
+arr1 node-v8-clone cloner    x  5,541,714 ops/sec ±0.54% (91 runs sampled)
+
+arr2 = [0, 1, 2, ..., 998, 999]
+arr2 slice()                 x    534,954 ops/sec ±0.39% (91 runs sampled)
+arr2 []       for i &lt; l i++  x     88,164 ops/sec ±0.59% (85 runs sampled)
+arr2 Array(l) for i &lt; l i++  x    201,974 ops/sec ±0.76% (95 runs sampled)
+arr2 for in                  x      8,666 ops/sec ±0.61% (95 runs sampled)
+arr2 for in hasOwnProperty   x      4,123 ops/sec ±0.47% (101 runs sampled)
+arr2 lodash _.clone          x    157,718 ops/sec ±0.55% (83 runs sampled)
+arr2 node-v8-clone cloner    x    552,515 ops/sec ±0.24% (81 runs sampled)
+</code></pre>
+
+<p>RegExp shallow cloning:</p>
+
+<pre><code>RegExp new RegExp(re.source, /\w*$/.exec(re))    x 1,004,526 ops/sec ±2.53% (91 runs sampled)
+RegExp new RegExp(re.source, "g"? + "i"? + "m"?) x 3,550,976 ops/sec ±3.00% (90 runs sampled)
+RegExp lodash _.clone                            x 1,119,311 ops/sec ±1.79% (85 runs sampled)
+RegExp node-v8-clone js cloner                   x 5,000,977 ops/sec ±1.33% (94 runs sampled)
+</code></pre>
+
+<p>Date shallow cloning:</p>
+
+<pre><code>date new Date(+date) cloner x 2,657,488 ops/sec ±2.52% (87 runs sampled)
+date lodash _.clone         x 1,185,187 ops/sec ±1.63% (93 runs sampled)
+date node-v8-clone cloner   x 5,147,363 ops/sec ±0.98% (93 runs sampled)
+</code></pre>
+        </article>
+      </div>
+    </div>
+    <footer>
+      <div class="owner">
+      <p><a href="https://github.com/AlexeyKupershtokh" class="avatar"><img src="https://secure.gravatar.com/avatar/4f350605ac56b291a849ae6d6041394e?s=30&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" width="48" height="48"/></a> <a href="https://github.com/AlexeyKupershtokh">AlexeyKupershtokh</a> maintains <a href="https://github.com/AlexeyKupershtokh/node-v8-clone">Node-v8-clone</a></p>
+
+
+      </div>
+      <div class="creds">
+        <small>This page generated using <a href="https://pages.github.com/">GitHub Pages</a><br/>theme by <a href="http://twitter.com/jonrohan/">Jon Rohan</a></small>
+      </div>
+    </footer>
+  </div>
+  <div class="current-section">
+    <a href="#top">Scroll to top</a>
+    <a href="https://github.com/AlexeyKupershtokh/node-v8-clone/tarball/master" class="tar">tar</a><a href="https://github.com/AlexeyKupershtokh/node-v8-clone/zipball/master" class="zip">zip</a><a href="" class="code">source code</a>
+    <p class="name"></p>
+  </div>
+
+  
+</body>
+</html>
