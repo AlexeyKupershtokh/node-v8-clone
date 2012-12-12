@@ -22,13 +22,13 @@
   "license": "BSD",
   "gypfile": true,
   "readmeFilename": "README.md",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "benchmark": "~1.0.0",
     "mocha": "~1.7.0",
     "cloneextend": "*",
     "clone": "*",
-    "lodash": "*"
+    "lodash": "*",
+    "benchmark.js-plot": "*"
   }
 }
