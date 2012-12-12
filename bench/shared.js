@@ -11,6 +11,8 @@ var range = function(n) {
 
 var date = module.exports.date = new Date();
 
+var re = module.exports.re = new RegExp('a', 'gi');
+
 // objs1: 1 sting keys and values
 var objs1 = module.exports.objs1 = {'_1': '_1'};
 

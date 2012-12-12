@@ -7,15 +7,12 @@ var shared = require('./shared.js');
 
 // regular for(var i in obj) cloner
 regular = function(obj) { var result = {}; for(var i in obj) result[i] = obj[i]; return result; };
-assert.deepEqual(objs1, regular(objs1));
 
 // regular cloner with own checks
 regular_own = function(obj) { var result = {}; for(var i in obj) if (obj.hasOwnProperty(i)) result[i] = obj[i]; return result; };
-assert.deepEqual(objs1, regular_own(objs1));
 
 // regular cloner with own checks
 regular_keys = function(obj) { var result = {}; var props = Object.keys(obj); for(var i = 0, l = props.length; i < l; i++) result[i] = obj[i]; return result; };
-assert.deepEqual(objs1, regular_own(objs1));
 
 var Cloner = require('..').Cloner;
 cloner = new Cloner(false);

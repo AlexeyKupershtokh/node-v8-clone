@@ -1,42 +1,31 @@
-var Benchmark = require('benchmark');
 var assert = require('assert');
-try { _ = require('lodash'); } catch (e) {};
+try { lodash = require('lodash'); } catch (e) {};
+try { _ = require('underscore'); } catch (e) {};
+try { owl = require('owl-deepcopy'); } catch(e) { console.warn('owl-deepcopy module is not installed'); };
 
-// RegExp
-re = new RegExp('a', 'gi');
-reFlags = /\w*$/;
-
-// node-v8-clone js
-clone = require('..').clone;
-assert.deepEqual(re, clone(re));
+var shared = require('./shared.js');
 
 // node-v8-clone
-v8_clone = require('..').v8_clone;
-assert.deepEqual(re, v8_clone(re));
+var Cloner = require('..').Cloner;
+cloner = new Cloner(false);
 
 // RegExp 'new RegExp(re.source, /\w*$/.exec(re))' cloner
+reFlags = /\w*$/;
 re_clone = function(re) { return new RegExp(re.source, reFlags.exec(re)); }
-assert.deepEqual(re, re_clone(re));
 
 // RegExp 'new RegExp(source, flags)' cloner
 re_clone2 = function(re) {
   var flags = (re.global ? 'g' : '') + (re.ignoreCase ? 'i' : '') + (re.multiline ? 'm' : '');
   return new RegExp(re.source, flags);
-}
-assert.deepEqual(re, re_clone2(re));
+};
 
-var suite = new Benchmark.Suite;
-suite.on('cycle', function(event) {
-  console.log(String(event.target));
+['re'].forEach(function(obj) {
+  global[obj] = shared[obj];
+  shared.benchmark(obj, [
+    ['new RegExp(re.source, /\\w*$/.exec(re))',   're_clone(re)'],
+    ['new RegExp(re.source, "g"? + "i"? + "m"?)', 're_clone2(re)'],
+    ['_.clone',                                   '_.clone(re)'],
+    ['lodash.clone',                              'lodash.clone(re, false)'],
+    ['node-v8-clone',                             'cloner.clone(re, false)']
+  ]);
 });
-suite.on('complete', function() {
-  console.log('Fastest is ' + this.filter('fastest').pluck('name'));
-});
-
-suite.add('RegExp new RegExp(re.source, /\\w*$/.exec(re))   ', 're_clone(re)');
-suite.add('RegExp new RegExp(re.source, "g"? + "i"? + "m"?)', 're_clone2(re)');
-suite.add('RegExp lodash _.clone                           ', '_.clone(re, false)');
-suite.add('RegExp node-v8-clone js cloner                  ', 'clone(re, false)');
-suite.add('RegExp node-v8-clone cloner                     ', 'v8_clone(re)');
-
-suite.run({ 'async': true });

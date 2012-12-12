@@ -9,15 +9,12 @@ var shared = require('./shared.js');
 // node-v8-clone
 var Cloner = require('..').Cloner;
 cloner = new Cloner(false);
-assert.deepEqual(date, cloner.clone(date));
 
 // date 'new Date(+date)' cloner
 date_clone1 = function(date) { return new Date(+date); }
-assert.deepEqual(date, date_clone1(date));
 
 // date 'new Date(date)' cloner
 date_clone2 = function(date) { return new Date(date); }
-assert.deepEqual(date, date_clone2(date));
 
 ['date'].forEach(function(obj) {
   global[obj] = shared[obj];
