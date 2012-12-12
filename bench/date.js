@@ -1,29 +1,32 @@
-var Benchmark = require('benchmark');
 var assert = require('assert');
-try { _ = require('lodash'); } catch (e) {};
+try { lodash = require('lodash'); } catch (e) {};
+try { _ = require('underscore'); } catch (e) {};
+try { owl = require('owl-deepcopy'); } catch(e) { console.warn('owl-deepcopy module is not installed'); };
 
 // Date
-date = new Date;
+var shared = require('./shared.js');
 
 // node-v8-clone
 var Cloner = require('..').Cloner;
 cloner = new Cloner(false);
 assert.deepEqual(date, cloner.clone(date));
 
+// date 'new Date(+date)' cloner
+date_clone1 = function(date) { return new Date(+date); }
+assert.deepEqual(date, date_clone1(date));
+
 // date 'new Date(date)' cloner
-date_clone = function(date) { return new Date(+date); }
-assert.deepEqual(date, date_clone(date));
+date_clone2 = function(date) { return new Date(date); }
+assert.deepEqual(date, date_clone2(date));
 
-var suite = new Benchmark.Suite;
-suite.on('cycle', function(event) {
-  console.log(String(event.target));
+['date'].forEach(function(obj) {
+  global[obj] = shared[obj];
+  shared.benchmark(obj, [
+    ['new Date(+date)', 'date_clone1(' + obj + ')'],
+    ['new Date(date)',  'date_clone2(' + obj + ')'],
+    ['_.clone',         '_.clone(' + obj + ')'],
+    ['lodash.clone',    'lodash.clone(' + obj + ', false)'],
+    ['owl.copy',        'owl.copy(' + obj + ')'],
+    ['node-v8-clone',   'cloner.clone(' + obj + ')']
+  ]);
 });
-suite.on('complete', function() {
-  console.log('Fastest is ' + this.filter('fastest').pluck('name'));
-});
-
-suite.add('date new Date(+date) cloner', 'date_clone(date)');
-suite.add('date lodash _.clone        ', '_.clone(date, false)');
-suite.add('date node-v8-clone cloner  ', 'cloner.clone(date)');
-
-suite.run({ 'async': true });

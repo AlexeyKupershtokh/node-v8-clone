@@ -1,14 +1,9 @@
 var assert = require('assert');
 try { lodash = require('lodash'); } catch (e) {};
 try { _ = require('underscore'); } catch (e) {};
+try { owl = require('owl-deepcopy'); } catch(e) { console.warn('owl-deepcopy module is not installed'); };
 
 shared = require('./shared.js');
-arr1 = shared.arr1;
-arr2 = shared.arr2;
-arr3 = shared.arr3;
-arr4 = shared.arr4;
-arr5 = shared.arr5;
-arr6 = shared.arr6;
 
 // node-v8-clone js
 var Cloner = require('..').Cloner;
@@ -45,17 +40,19 @@ assert.deepEqual(arr1, arr_for_in_has(arr1));
 hybrid = function(a) { return (a.length > 100) ? a.slice() : arr_for3(a); };
 
 ['arr1', 'arr2', 'arr3', 'arr4', 'arr5', 'arr6'].forEach(function(obj) {
+  global[obj] = shared[obj];
   shared.benchmark(obj, [
-    ['slice()',       'slice(' + obj + ')'],
-    ['[] ++ push',    'arr_for1(' + obj + ')'],
-    ['[] ++ [i]',     'arr_for2(' + obj + ')'],
-    ['Array(l) ++',   'arr_for3(' + obj + ')'],
-    ['Array() ++',    'arr_for4(' + obj + ')'],
-    ['hybrid',        'hybrid(' + obj + ')'],
-    ['for in',        'arr_for_in(' + obj + ')'],
-    ['for in has',    'arr_for_in_has(' + obj + ')'],
-    ['lodash.clone',  'lodash.clone(' + obj + ', false)'],
-    ['_.clone',       '_.clone(' + obj + ')'],
-    ['node-v8-clone', 'cloner.clone(' + obj + ')']
+    ['slice',                        'slice(' + obj + ')'],
+    ['[] for i++ push',              'arr_for1(' + obj + ')'],
+    ['[] for i++ b[i] = a[i]',       'arr_for2(' + obj + ')'],
+    ['Array(l) for i++ b[i] = a[i]', 'arr_for3(' + obj + ')'],
+    //['Array() ++',                   'arr_for4(' + obj + ')'], // same as "[] for i++ b[i] = a[i]"
+    //['hybrid',                       'hybrid(' + obj + ')'],
+    ['for in',                       'arr_for_in(' + obj + ')'],
+    ['for in hasOwnProperty',        'arr_for_in_has(' + obj + ')'],
+    ['lodash.clone',                 'lodash.clone(' + obj + ', false)'],
+    ['_.clone',                      '_.clone(' + obj + ')'],
+    ['owl.copy',                     'owl.copy(' + obj + ')'],
+    ['node-v8-clone',                'cloner.clone(' + obj + ')']
   ]);
 });

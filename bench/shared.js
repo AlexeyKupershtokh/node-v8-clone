@@ -11,34 +11,58 @@ var range = function(n) {
 
 var date = module.exports.date = new Date();
 
-// obj1: 5 sting keys and values
-var obj1 = module.exports.obj1 = {'a': 'a', 'b': 'b', 'c': 'c', 'd': 'd', 'e': 'e'};
+// objs1: 1 sting keys and values
+var objs1 = module.exports.objs1 = {'_1': '_1'};
 
-// obj2: 5 integer keys and values
-var obj2 = module.exports.obj2 = {1: 1, 2: 2, 3: 3, 4: 4, 5: 5};
+// objs2: 10 string keys and values
+var objs2 = module.exports.objs2 = {};
+for (var i = 0; i < 10; i++) {
+  objs2['_' + i] = '_' + i;
+}
 
-// obj3: 100 string keys and values
-var obj3 = module.exports.obj3 = {};
+// objs3: 100 string keys and values
+var objs3 = module.exports.objs3 = {};
 for (var i = 0; i < 100; i++) {
-  obj3['_' + i] = '_' + i;
+  objs3['_' + i] = '_' + i;
 }
 
-// obj4: 100 integer keys and values
-var obj4 = module.exports.obj4 = {};
+// objs4: 1000 string keys and values
+var objs4 = module.exports.objs4 = {};
+for (var i = 0; i < 1000; i++) {
+  objs4['_' + i] = '_' + i;
+}
+
+// objs5: 10000 string keys and values
+var objs5 = module.exports.objs5 = {};
+for (var i = 0; i < 10000; i++) {
+  objs5['_' + i] = '_' + i;
+}
+
+// objn1: 1 integer keys and values
+var objn1 = module.exports.objn2 = {1: 1};
+
+// objn2: 10 integer keys and values
+var objn2 = module.exports.objn2 = {};
+for (var i = 0; i < 10; i++) {
+  objn2[i] = i;
+}
+
+// objn3: 100 integer keys and values
+var objn3 = module.exports.objn3 = {};
 for (var i = 0; i < 100; i++) {
-  obj4[i] = i;
+  objn3[i] = i;
 }
 
-// obj5: 10000 string keys and values
-var obj5 = module.exports.obj5 = {};
-for (var i = 0; i < 10000; i++) {
-  obj5['_' + i] = '_' + i;
+// objn4: 1000 integer keys and values
+var objn4 = module.exports.objn4 = {};
+for (var i = 0; i < 1000; i++) {
+  objn4[i] = i;
 }
 
-// obj6: 10000 integer keys and values
-var obj6 = module.exports.obj6 = {};
+// objn5: 10000 integer keys and values
+var objn5 = module.exports.objn5 = {};
 for (var i = 0; i < 10000; i++) {
-  obj6[i] = i;
+  objn5[i] = i;
 }
 
 // deepobj1: 5 sting keys and values
@@ -87,9 +111,16 @@ var arr4 = module.exports.arr4 = range(1000);
 var arr5 = module.exports.arr5 = range(10000);
 
 // array of 100000 numeric elements
-//var arr6 = module.exports.arr6 = range(100000);
+var arr6 = module.exports.arr6 = range(100000);
 
-var arr6 = module.exports.arr6 = [];
+module.exports.deepplainarr1 = arr1;
+module.exports.deepplainarr2 = arr2;
+module.exports.deepplainarr3 = arr3;
+module.exports.deepplainarr4 = arr4;
+module.exports.deepplainarr5 = arr5;
+module.exports.deepplainarr6 = arr6;
+
+/*var arr6 = module.exports.arr6 = [];
 for (var i = 0; i < 100000; i++) {
   switch(i % 6) {
     case 0:
@@ -111,7 +142,7 @@ for (var i = 0; i < 100000; i++) {
       arr6.push(new Function(' return ' + i));
       break;
   }
-}
+}*/
 
 // deeparr1: 5 string keys and values
 var deeparr1 = module.exports.deeparr1 = ['a', ['b', 'c', 'd'], 'e'];
