@@ -9,12 +9,15 @@ var shared = require('./shared.js');
 var Cloner = require('..').Cloner;
 cloner = new Cloner(false);
 
+// RegExp 'new RegExp(re)' cloner
+re_clone1 = function(re) { return new RegExp(re); };
+
 // RegExp 'new RegExp(re.source, /\w*$/.exec(re))' cloner
 reFlags = /\w*$/;
-re_clone = function(re) { return new RegExp(re.source, reFlags.exec(re)); }
+re_clone2 = function(re) { return new RegExp(re.source, reFlags.exec(re)); };
 
 // RegExp 'new RegExp(source, flags)' cloner
-re_clone2 = function(re) {
+re_clone3 = function(re) {
   var flags = (re.global ? 'g' : '') + (re.ignoreCase ? 'i' : '') + (re.multiline ? 'm' : '');
   return new RegExp(re.source, flags);
 };
@@ -22,8 +25,9 @@ re_clone2 = function(re) {
 ['re'].forEach(function(obj) {
   global[obj] = shared[obj];
   shared.benchmark(obj, [
-    ['new RegExp(re.source, /\\w*$/.exec(re))',   're_clone(re)'],
-    ['new RegExp(re.source, "g"? + "i"? + "m"?)', 're_clone2(re)'],
+    ['new RegExp(re)',                            're_clone1(re)'],
+    ['new RegExp(re.source, /\\w*$/.exec(re))',   're_clone2(re)'],
+    ['new RegExp(re.source, "g"? + "i"? + "m"?)', 're_clone3(re)'],
     ['_.clone',                                   '_.clone(re)'],
     ['lodash.clone',                              'lodash.clone(re, false)'],
     ['node-v8-clone',                             'cloner.clone(re, false)']

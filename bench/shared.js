@@ -9,6 +9,49 @@ var range = function(n) {
   return result;
 };
 
+var random_stuff = function(i) {
+  switch(i % 10) {
+    case 0:
+      return i;
+      break;
+    case 1:
+      return i + 0.5;
+      break;
+    case 2:
+      return Math.random() > 0.5;
+      break;
+    case 3:
+      return new Date();
+      break;
+    case 4:
+      //return /i/;
+      break;
+    case 5:
+      //return new Function(' return ' + i);
+      break;
+    case 6:
+      return null;
+      break;
+    case 7:
+      return "aaaaaaa" + i;
+      break;
+    case 8:
+      return [1, 2, 3, 's', i];
+      break;
+    case 9:
+      return {1: 1, _2: '_2', 3: new Date(), _4: i};
+      break;
+  }
+};
+
+var random_arr = function(n) {
+  var result = [];
+  for (var i = 0; i < n; i++) {
+    result.push(random_stuff(i));
+  }
+  return result;
+};
+
 var date = module.exports.date = new Date();
 
 var re = module.exports.re = new RegExp('a', 'gi');
@@ -122,29 +165,10 @@ module.exports.deepplainarr4 = arr4;
 module.exports.deepplainarr5 = arr5;
 module.exports.deepplainarr6 = arr6;
 
-/*var arr6 = module.exports.arr6 = [];
-for (var i = 0; i < 100000; i++) {
-  switch(i % 6) {
-    case 0:
-      arr6.push(i);
-      break;
-    case 1:
-      arr6.push(i + 0.5);
-      break;
-    case 2:
-      arr6.push(Math.random() > 0.5);
-      break;
-    case 3:
-      arr6.push(new Date());
-      break;
-    case 4:
-      arr6.push(new RegExp('' + i));
-      break;
-    case 5:
-      arr6.push(new Function(' return ' + i));
-      break;
-  }
-}*/
+module.exports.mixed1 = random_arr(10);
+module.exports.mixed2 = random_arr(100);
+module.exports.mixed3 = random_arr(1000);
+module.exports.mixed4 = random_arr(10000);
 
 // deeparr1: 5 string keys and values
 var deeparr1 = module.exports.deeparr1 = ['a', ['b', 'c', 'd'], 'e'];

@@ -10,7 +10,7 @@ var shared = require('./shared.js');
 var Cloner = require('..').Cloner;
 cloner = new Cloner(true);
 
-['deep1', 'deep2', 'deep3', 'deep4'].forEach(function(obj) {
+['deepobj1', 'deepobj2', 'deepobj3', 'deepobj4', 'mixed1', 'mixed2', 'mixed3', 'mixed4'].forEach(function(obj) {
   global[obj] = shared[obj];
   shared.benchmark(obj, [
     ['lodash.clone',  'lodash.clone(' + obj + ', true)'],
