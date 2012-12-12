@@ -41,7 +41,7 @@ for (var i = 0; i < 10000; i++) {
 }
 
 // objn1: 1 integer keys and values
-var objn1 = module.exports.objn2 = {1: 1};
+var objn1 = module.exports.objn1 = {1: 1};
 
 // objn2: 10 integer keys and values
 var objn2 = module.exports.objn2 = {};
