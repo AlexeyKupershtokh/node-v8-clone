@@ -1,4 +1,5 @@
 var assert = require('assert');
+var util = require('util');
 
 module.exports.behavesAsShallow = function() {
   describe('should clone primitives', function(){
@@ -76,7 +77,7 @@ module.exports.behavesAsShallow = function() {
       assert.equal(a.myprop, 2);
       assert.equal(b.myprop, 2);
     });
-    it('should clone objects', function(){
+    it('should clone {} objects', function(){
       var a = {x : 1, y: 2};
       var b = this.clone(a);
       assert.ok(a !== b);
@@ -84,6 +85,25 @@ module.exports.behavesAsShallow = function() {
       assert.equal(a.y, 2);
       assert.equal(b.x, 1);
       assert.equal(b.y, 2);
+    });
+    it('should clone Object.create(null) objects', function(){
+      var a = Object.create(null);
+      a.x = 1;
+      a.y = 2;
+      var b = this.clone(a);
+      assert.ok(a !== b);
+      assert.equal(a.x, 1);
+      assert.equal(a.y, 2);
+      assert.equal(b.x, 1);
+      assert.equal(b.y, 2);
+    });
+    it('should clone inherited objects', function(){
+      var a = Object.create({ q: 1 });
+      var b = this.clone(a);
+      assert.ok(a !== b);
+      assert.equal(a.q, 1);
+      assert.equal(b.q, 1);
+      assert.ok(a.__proto__ === b.__proto__);
     });
     it('should clone arrays', function(){
       var a = [1, 2];
@@ -185,6 +205,8 @@ module.exports.behavesAsShallow = function() {
       assert.equal(b(), 3);
       assert.equal(b(), 4);
     });
+    it('should clone Buffer objects', false, function(){
+    });
   });
   describe('should clone custom objects', function(){
     it('should clone instances', function(){
@@ -206,6 +228,25 @@ module.exports.behavesAsShallow = function() {
       assert.equal(b.c, 1);
       assert.equal(b.getC(), 1);
       assert.equal(b.d, 2);
+    });
+    it('should clone inherited instances', function(){
+      var clazz1 = function(c) { this.c = c };
+      clazz1.prototype.e = 1;
+      var clazz2 = function (c) { this.c = c };
+      util.inherits(clazz2, clazz1);
+      clazz2.prototype.d = 2;
+      var a = new clazz2(3);
+      var b = this.clone(a);
+      assert.ok(a !== b);
+      assert.ok(a.hasOwnProperty('c'));
+      assert.ok(b.hasOwnProperty('c'));
+      assert.ok(!a.hasOwnProperty('e'));
+      assert.ok(!b.hasOwnProperty('e'));
+      assert.ok(!a.hasOwnProperty('d'));
+      assert.ok(!b.hasOwnProperty('d'));
+      assert.equal(a.c, b.c);
+      assert.equal(a.e, b.e);
+      assert.equal(a.d, b.d);
     });
   });
 };
