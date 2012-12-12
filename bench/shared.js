@@ -136,6 +136,7 @@ var f = module.exports.f = function (code) {
 var benchmark = module.exports.benchmark = function(suite_name, benchmarks) {
   var suite = new Benchmark.Suite;
   suite.on('cycle', function(event) {
+    if (typeof gc == 'function') gc();
     console.log(String(event.target));
   });
   suite.on('complete', function() {
