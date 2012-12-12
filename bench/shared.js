@@ -144,7 +144,7 @@ var benchmark = module.exports.benchmark = function(suite_name, benchmarks) {
     console.log('Fastest is ' + this.filter('fastest').pluck('name'));
   });
 
-  var options = { maxTime: 0.1 };
+  var options = { maxTime: 1 };
 
   benchmarks.forEach(function(tuple) {
     var benchmark_name = tuple[0];
