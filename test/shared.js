@@ -86,6 +86,17 @@ module.exports.behavesAsShallow = function() {
       assert.equal(b.x, 1);
       assert.equal(b.y, 2);
     });
+    it('should preserve {} non-enumerable properties', function(){
+      var a = {x : 1};
+      Object.defineProperty(a, 'y', {value: 2});
+      assert.deepEqual(Object.keys(a), ['x']);
+      var b = this.clone(a);
+      assert.ok(a !== b);
+      assert.equal(a.x, 1);
+      assert.equal(a.y, 2);
+      assert.equal(b.x, 1);
+      assert.equal(b.y, 2);
+    });
     it('should clone Object.create(null) objects', function(){
       var a = Object.create(null);
       a.x = 1;
