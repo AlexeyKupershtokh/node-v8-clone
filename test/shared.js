@@ -200,16 +200,27 @@ module.exports.behavesAsShallow = function() {
       assert.equal(a.myprop, 2);
       assert.equal(b.myprop, 2);
     });
-    it('should clone Arguments', function(){
+    it('should clone Arguments of function()', function(){
       function getargs() { return arguments; };
-      var a = getargs(1, 2, 3);
+      var a = getargs(1, 2);
       var b = this.clone(a);
       assert.ok(a !== b);
-      assert.deepEqual(a, getargs(1, 2, 3));
-      assert.deepEqual(b, getargs(1, 2, 3));
+      assert.deepEqual(a, getargs(1, 2));
+      assert.deepEqual(b, getargs(1, 2));
       a[0] = 4;
-      assert.deepEqual(a, getargs(4, 2, 3));
-      assert.deepEqual(b, getargs(1, 2, 3));
+      assert.deepEqual(a, getargs(4, 2));
+      assert.deepEqual(b, getargs(1, 2));
+    });
+    it('should clone Arguments of function(x)', false, function(){
+      function getargs(x) { return arguments; };
+      var a = getargs(1, 2);
+      var b = this.clone(a);
+      assert.ok(a !== b);
+      assert.deepEqual(a, getargs(1, 2));
+      assert.deepEqual(b, getargs(1, 2));
+      a[0] = 4;
+      assert.deepEqual(a, getargs(4, 2));
+      assert.deepEqual(b, getargs(1, 2));
     });
     it('should preserve Arguments custom properties', function(){
       function getargs() { return arguments; };
