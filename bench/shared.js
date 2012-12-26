@@ -192,13 +192,19 @@ var f = module.exports.f = function (code) {
 
 var benchmark = module.exports.benchmark = function(suite_name, benchmarks) {
   var suite = new Benchmark.Suite;
+  suite.on('start', function() {
+    console.log('===', suite_name, '===');
+  });
   suite.on('cycle', function(event) {
     if (typeof gc == 'function') gc();
     console.log(String(event.target));
   });
   suite.on('complete', function() {
-    plot(this, { path: 'results/' + suite_name + '.png' });
+    var path = 'results/' + suite_name + '.png';
+    plot(this, { path: path });
     console.log('Fastest is ' + this.filter('fastest').pluck('name'));
+    console.log('written plot:', path);
+    console.log();
   });
 
   var options = { maxTime: 1 };
