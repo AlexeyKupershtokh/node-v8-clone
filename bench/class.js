@@ -15,6 +15,7 @@ cloner = new Cloner(false);
     ['Clazz.clone()', obj + '.clone()'],
     ['lodash.clone',  'lodash.clone(' + obj + ')'],
     ['_.clone',       '_.clone(' + obj + ')'],
+    ['owl.copy',      'owl.copy(' + obj + ')'],
     ['node-v8-clone', 'cloner.clone(' + obj + ')']
   ]);
 });
