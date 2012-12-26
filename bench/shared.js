@@ -196,10 +196,6 @@ Clazz.prototype.clone = function() {
 };
 var instance = module.exports.instance = new Clazz(1, 2, 3, 4);
 
-var f = module.exports.f = function (code) {
-  return new Function('next', 'count', 'while (count--) {' + code + '}; next();');
-};
-
 var benchmark = module.exports.benchmark = function(suite_name, benchmarks) {
   var suite = new Benchmark.Suite;
   suite.on('start', function() {
