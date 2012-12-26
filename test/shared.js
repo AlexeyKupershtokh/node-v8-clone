@@ -258,6 +258,15 @@ module.exports.behavesAsShallow = function() {
       assert.equal(b(), 4);
     });
     it('should clone Buffer objects', false, function(){
+      var a = new Buffer('test', 'utf-8');
+      console.log(Object.getOwnPropertyNames(a));
+      var b = this.clone(a);
+      assert.ok(a !== b);
+      assert.equal(a.toString(), 'test');
+      assert.equal(b.toString(), 'test');
+      a.fill('a');
+      assert.equal(a.toString(), 'aaaa');
+      assert.equal(b.toString(), 'test');
     });
   });
   describe('should clone custom objects', function(){
