@@ -331,6 +331,18 @@ module.exports.behavesAsDeep = function() {
       assert.equal(b.x.z, 1);
       assert.equal(b.y, 2);
     });
+    it('should deeply clone {} non-enumerable properties', false, function(){
+      var a = {x : 1};
+      Object.defineProperty(a, 'y', {enumerable: false, configurable: true, writable: true, value: {z: 3}});
+      assert.deepEqual(Object.keys(a), ['x']);
+      var b = this.clone(a);
+      assert.ok(a !== b);
+      assert.ok(a.y !== b.y);
+      assert.equal(a.x, 1);
+      assert.equal(a.y.z, 3);
+      assert.equal(b.x, 1);
+      assert.equal(b.y.z, 3);
+    });
     it('should deeply clone nested arrays', function(){
       var a = [[1], 2];
       var b = this.clone(a);
