@@ -185,6 +185,16 @@ for (var i = 0; i < 100; i++) {
   ];
 }
 
+var Clazz = module.exports.Clazz = function(a, b, c, d) {
+  this.a = a;
+  this.b = b;
+  this.c = c;
+  this.d = d;
+};
+Clazz.prototype.clone = function() {
+  return new Clazz(this.a, this.b, this.c, this.d);
+};
+var instance = module.exports.instance = new Clazz(1, 2, 3, 4);
 
 var f = module.exports.f = function (code) {
   return new Function('next', 'count', 'while (count--) {' + code + '}; next();');

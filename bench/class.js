@@ -1,43 +1,20 @@
-var Benchmark = require('benchmark');
 var assert = require('assert');
-try { _ = require('lodash'); } catch (e) {};
+try { lodash = require('lodash'); } catch (e) {};
+try { _ = require('underscore'); } catch (e) {};
+try { owl = require('owl-deepcopy'); } catch(e) { console.warn('owl-deepcopy module is not installed'); };
 
-// clazz
-Clazz = function(a, b, c, d) {
-  this.a = a;
-  this.b = b;
-  this.c = c;
-  this.d = d;
-};
-inst = new Clazz(1, 2, 3, 4);
-
-assert.equal(inst.a, 1);
-assert.equal(inst.b, 2);
-assert.equal(inst.c, 3);
-assert.equal(inst.d, 4);
+shared = require('./shared.js');
 
 // node-v8-clone js
 var Cloner = require('..').Cloner;
 cloner = new Cloner(false);
 
-var inst2 = clone(inst);
-inst2.constructor(5, 6, 7 ,8)
-
-assert.equal(inst2.a, 5);
-assert.equal(inst2.b, 6);
-assert.equal(inst2.c, 7);
-assert.equal(inst2.d, 8);
-
-var suite = new Benchmark.Suite;
-suite.on('cycle', function(event) {
-  console.log(String(event.target));
+['instance'].forEach(function(obj) {
+  global[obj] = shared[obj];
+  shared.benchmark(obj, [
+    ['Clazz.clone()', obj + '.clone()'],
+    ['lodash.clone',  'lodash.clone(' + obj + ')'],
+    ['_.clone',       '_.clone(' + obj + ')'],
+    ['node-v8-clone', 'cloner.clone(' + obj + ')']
+  ]);
 });
-suite.on('complete', function() {
-  console.log('Fastest is ' + this.filter('fastest').pluck('name'));
-});
-
-suite.add('Clazz new Clazz(5, 6, 7, 8)', 'var inst2 = new Clazz(1, 2, 3, 4);');
-suite.add('Clazz lodash _.clone       ', 'var inst2 = _.clone(inst, false);');
-suite.add('Clazz node-v8-clone cloner ', 'var inst2 = cloner.clone(inst);');
-
-suite.run({ 'async': true });
