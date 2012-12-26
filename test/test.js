@@ -1,6 +1,28 @@
 var assert = require('assert');
 var Cloner = require('..').Cloner;
+var clone = require('..').clone;
 var shared = require('./shared.js');
+
+describe('node-v8-clone.clone(obj, false)', function(){
+  beforeEach(function(){
+    this.clone = function(value) {
+      return clone(value);
+    };
+  });
+  shared.behavesAsShallow();
+});
+
+describe('node-v8-clone.clone(obj, true)', function(){
+  beforeEach(function(){
+    this.clone = function(value) {
+      return clone(value, true);
+    };
+  });
+  shared.behavesAsShallow();
+  shared.behavesAsDeep();
+  shared.behavesAsDeepWCircular();
+});
+
 
 describe('new Cloner(false)', function(){
   beforeEach(function(){
