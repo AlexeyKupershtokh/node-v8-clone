@@ -26,8 +26,8 @@ re_clone3 = function(re) {
   global[obj] = shared[obj];
   shared.benchmark(obj, [
     ['new RegExp(re)',                            're_clone1(re)'],
-    ['new RegExp(re.source, /\\w*$/.exec(re))',   're_clone2(re)'],
-    ['new RegExp(re.source, "g"? + "i"? + "m"?)', 're_clone3(re)'],
+    //['new RegExp(re.source, /\\w*$/.exec(re))',   're_clone2(re)'],
+    ['new RegExp(re.source, g?+i?+m?)',           're_clone3(re)'],
     ['_.clone',                                   '_.clone(re)'],
     ['lodash.clone',                              'lodash.clone(re, false)'],
     ['node-v8-clone',                             'cloner.clone(re, false)']
