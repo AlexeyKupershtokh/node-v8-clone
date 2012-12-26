@@ -162,6 +162,20 @@ module.exports.behavesAsShallow = function() {
       assert.equal(a.lastIndex, 3);
       assert.equal(b.lastIndex, 0);
     });
+    it('should preserve RegExp lastIndex property', function(){
+      var a = new RegExp('a+', 'g');
+      a.exec('a aa');
+      var b = this.clone(a);
+      assert.ok(a !== b);
+      assert.equal(a.lastIndex, 1);
+      assert.equal(b.lastIndex, 1);
+      a.exec('a aa');
+      assert.equal(a.lastIndex, 4);
+      assert.equal(b.lastIndex, 1);
+      b.exec('a aa');
+      assert.equal(a.lastIndex, 4);
+      assert.equal(b.lastIndex, 4);
+    });
     it('should preserve RegExp instances custom properties', function(){
       var a = new RegExp('a+', 'g');
       a.myprop = 2;
