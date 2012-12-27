@@ -1,6 +1,8 @@
 var assert = require('assert');
 var util = require('util');
 
+var pending = false;
+
 module.exports.behavesAsShallow = function() {
   describe('should clone primitives', function(){
     it('should clone null', function(){
@@ -211,7 +213,7 @@ module.exports.behavesAsShallow = function() {
       assert.deepEqual(a, getargs(4, 2));
       assert.deepEqual(b, getargs(1, 2));
     });
-    it('should clone Arguments of function(x)', false, function(){
+    it('should clone Arguments of function(x)', pending, function(){
       function getargs(x) { return arguments; };
       var a = getargs(1, 2);
       var b = this.clone(a);
@@ -245,7 +247,7 @@ module.exports.behavesAsShallow = function() {
       assert.equal(a.myprop, 2);
       assert.equal(b.myprop, 2);
     });
-    it('should clone closures context', false, function(){
+    it('should clone closures context', pending, function(){
       var generator = function () { var i = 0; return function() { return ++i; }; };
       var a = generator();
       assert.equal(a(), 1);
@@ -257,7 +259,7 @@ module.exports.behavesAsShallow = function() {
       assert.equal(b(), 3);
       assert.equal(b(), 4);
     });
-    it('should clone Buffer objects', false, function(){
+    it('should clone Buffer objects', pending, function(){
       var a = new Buffer('test', 'utf-8');
       console.log(Object.getOwnPropertyNames(a));
       var b = this.clone(a);
@@ -381,7 +383,7 @@ module.exports.behavesAsDeep = function() {
       assert.equal(b.x.z, 1);
       assert.equal(b.y, 2);
     });
-    it('should deeply clone {} non-enumerable properties', false, function(){
+    it('should deeply clone {} non-enumerable properties', pending, function(){
       var a = {x : 1};
       Object.defineProperty(a, 'y', {enumerable: false, configurable: true, writable: true, value: {z: 3}});
       assert.deepEqual(Object.keys(a), ['x']);
