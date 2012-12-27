@@ -46,8 +46,8 @@ a[1] === b[1] // false
 
 ### Benchmark results
 
- * <a href="https://github.com/AlexeyKupershtokh/node-v8-clone/wiki/Benchmark-graphs">Benchmark graphs</a>.
- * <a href="https://github.com/AlexeyKupershtokh/node-v8-clone/wiki/Raw-benchmark-results">Raw benchmark results.</a>.
+ * [Benchmark graphs](https://github.com/AlexeyKupershtokh/node-v8-clone/wiki/Benchmark-graphs).
+ * [Raw benchmark results](https://github.com/AlexeyKupershtokh/node-v8-clone/wiki/Raw-benchmark-results).
 
 ### Running tests
 
@@ -66,6 +66,6 @@ To run tests for 3rdparty modules run:
 $ npm run-script test-3rdparty
 ```
 
-Test results are available <a href="https://github.com/AlexeyKupershtokh/node-v8-clone/wiki/Test-results">here</a>.
+Test results are available [here](https://github.com/AlexeyKupershtokh/node-v8-clone/wiki/Test-results).
 
-Also you may want to check the <a href="https://travis-ci.org/AlexeyKupershtokh/node-v8-clone">module's page at Travis CI</a>.
+Also you may want to check the [module's page at Travis CI](https://travis-ci.org/AlexeyKupershtokh/node-v8-clone).
