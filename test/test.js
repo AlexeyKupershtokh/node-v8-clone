@@ -46,10 +46,11 @@ describe('new Cloner(true)', function(){
   shared.behavesAsDeepWCircular();
 });
 
-describe('new Cloner(true, false)', function(){
+describe('new Cloner(true) without circular checks', function(){
   beforeEach(function(){
     this.clone = function(value) {
-      var cloner = new Cloner(true, false);
+      var cloner = new Cloner(true);
+      cloner.setCircularChecks(false);
       return cloner.clone(value);
     };
   });

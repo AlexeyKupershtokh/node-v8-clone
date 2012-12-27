@@ -9,8 +9,7 @@ var shared = require('./shared.js');
 // node-v8-clone
 var Cloner = require('..').Cloner;
 cloner1 = new Cloner(true);
-cloner2 = new Cloner(true, true, { 'Array': Cloner.deep_array });
-cloner3 = new Cloner(true, false, { 'Array': Cloner.deep_array });
+cloner2 = new Cloner(true, { 'Array': Cloner.deep_array });
 
 ['deeparr1', 'deeparr2', 'deepplainarr1', 'deepplainarr2', 'deepplainarr3', 'deepplainarr4', 'deepplainarr5', 'deepplainarr6'].forEach(function(obj) {
   global[obj] = shared[obj];
