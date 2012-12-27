@@ -31,6 +31,18 @@ a === c // false
 a.x === c.x // true
 a.x.y === c.x.y // true
 ```
+Extended syntax:
+```javascript
+var Cloner = require('node-v8-clone').Cloner;
+var a = [1, [2, 3, 4], 5];
+
+// create a cloner instance for deep cloning optimized for arrays.
+var c = new Cloner(true, { 'Array': Cloner.deep_array });
+var b = c.clone(a);
+a === b // false
+a[1] === b[1] // false
+```
+
 
 ### Benchmark results
 
