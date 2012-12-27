@@ -16,7 +16,7 @@
   "bugs": {
     "url": "https://github.com/AlexeyKupershtokh/node-v8-clone/issues",
     "email": "alexey.kupershtokh@gmail.com"
-  }
+  },
   "keywords": [
     "v8",
     "clone",
