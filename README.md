@@ -46,8 +46,8 @@ a[1] === b[1] // false
 
 ### Benchmark results
 
-<a href="https://github.com/AlexeyKupershtokh/node-v8-clone/wiki/Benchmark-graphs">Benchmark graphs</a>.
-<a href="https://github.com/AlexeyKupershtokh/node-v8-clone/wiki/Raw-benchmark-results">Raw benchmark results.</a>.
+ * <a href="https://github.com/AlexeyKupershtokh/node-v8-clone/wiki/Benchmark-graphs">Benchmark graphs</a>.
+ * <a href="https://github.com/AlexeyKupershtokh/node-v8-clone/wiki/Raw-benchmark-results">Raw benchmark results.</a>.
 
 ### Running tests
 
