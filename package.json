@@ -35,7 +35,7 @@
     "clone": "*",
     "lodash": "*",
     "underscore": "*",
-    "benchmark.js-plot": "*",
+    "benchmark.js-plot": "0.1.2",
     "owl-deepcopy": "*"
   }
 }
