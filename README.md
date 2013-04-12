@@ -7,7 +7,7 @@ It's also very fast in some cases (benchmarks inside).
 
 ### Installation:
 
-Tested on node.js versions 0.4, 0.6. 0.8 and 0.9.
+Tested on node.js versions 0.4, 0.6. 0.8, 0.9 and 0.10.
 You may be asked to install `make` and `g++` as well.
 ```
 npm install node-v8-clone
