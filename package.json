@@ -27,7 +27,9 @@
   "license": "BSD",
   "gypfile": true,
   "readmeFilename": "README.md",
-  "dependencies": {},
+  "dependencies": {
+    "bindings": "~1.2"
+  },
   "devDependencies": {
     "benchmark": "*",
     "mocha": "*",
