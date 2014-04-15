@@ -6,11 +6,11 @@
 
 using namespace v8;
 
-Handle<Value> Clone(const Arguments& args) {
+NAN_METHOD(Clone) {
   Handle<Value>arg = args[0];
   if (arg->IsObject()) {
     Handle<Object>obj = Handle<Object>::Cast(arg);
-    HandleScope scope;
+    NanScope();
     return scope.Close(obj->Clone());
   }
   return arg;
@@ -18,7 +18,7 @@ Handle<Value> Clone(const Arguments& args) {
 
 Handle<Value> _DeepClone(Handle<Value> value, Local<Object> stackMapA, Local<Object> stackMapB) {
   if (value->IsObject()) {
-    HandleScope scope;
+    NanScope();
     Handle<Object> obj = Handle<Object>::Cast(value);
 
     // handle repeated items
@@ -72,7 +72,7 @@ Handle<Value> _DeepClone(Handle<Value> value, Local<Object> stackMapA, Local<Obj
   return value;
 }
 
-Handle<Value> DeepClone(const Arguments& args) {
+NAN_METHOD(DeepClone) {
   return _DeepClone(args[0], Object::New(), Object::New());
 }
 
