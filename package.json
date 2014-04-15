@@ -32,6 +32,7 @@
     "bindings": "~1.2"
   },
   "devDependencies": {
-    "mocha": "*"
+    "mocha": "*",
+    "nan": "*"
   }
 }

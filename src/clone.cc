@@ -2,6 +2,7 @@
 #define BUILDING_NODE_EXTENSION
 #endif  // BUILDING_NODE_EXTENSION
 #include <node.h>
+#include "nan.h"
 
 using namespace v8;
 
