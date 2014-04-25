@@ -77,9 +77,9 @@ NAN_METHOD(DeepClone) {
 }
 
 void Init(Handle<Object> target) {
-  target->Set(String::NewSymbol("clone"),
+  target->Set(NanSymbol("clone"),
       FunctionTemplate::New(Clone)->GetFunction());
-  target->Set(String::NewSymbol("deepclone"),
+  target->Set(NanSymbol("deepclone"),
       FunctionTemplate::New(DeepClone)->GetFunction());
 }
 
