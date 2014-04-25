@@ -7,13 +7,13 @@
 using namespace v8;
 
 NAN_METHOD(Clone) {
+  NanScope();
   Handle<Value>arg = args[0];
   if (arg->IsObject()) {
     Handle<Object>obj = Handle<Object>::Cast(arg);
-    NanScope();
-    return scope.Close(obj->Clone());
+    NanReturnValue(obj->Clone());
   }
-  return arg;
+  NanReturnValue(arg);
 }
 
 Handle<Value> _DeepClone(Handle<Value> value, Local<Object> stackMapA, Local<Object> stackMapB) {
