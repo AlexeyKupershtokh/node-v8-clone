@@ -12,4 +12,6 @@ matrix:
   allow_failures:
     - node_js: 0.11
 before_install:
-  - env
+  - nvm install $TRAVIS_NODE_VERSION
+  - nvm use $TRAVIS_NODE_VERSION
+  - node --version
