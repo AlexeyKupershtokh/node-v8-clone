@@ -73,7 +73,7 @@ Handle<Value> _DeepClone(Handle<Value> value, Local<Object> stackMapA, Local<Obj
 }
 
 NAN_METHOD(DeepClone) {
-  return _DeepClone(args[0], Object::New(), Object::New());
+  NanReturnValue(_DeepClone(args[0], Object::New(), Object::New()));
 }
 
 void Init(Handle<Object> target) {
