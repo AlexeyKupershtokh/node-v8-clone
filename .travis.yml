@@ -13,12 +13,14 @@ matrix:
   allow_failures:
     - node_js: 0.11
 before_install:
-  - env
   - echo $TRAVIS_NODE_VERSION
   - echo "${TRAVIS_NODE_VERSION}"
-  - rm -rf ~/.nvm
-  - wget -qO- https://raw.github.com/creationix/nvm/v0.5.1/install.sh | sh
-  - source ~/.nvm/nvm.sh
-  - '[ "${TRAVIS_NODE_VERSION}" != "0.4" ] || nvm install "${TRAVIS_NODE_VERSION}"'
-  - '[ "${TRAVIS_NODE_VERSION}" != "0.4" ] || nvm use "${TRAVIS_NODE_VERSION}"'
+  - |
+    if [ "${TRAVIS_NODE_VERSION}" != "0.4" ] then
+      rm -rf ~/.nvm
+      wget -qO- https://raw.github.com/creationix/nvm/v0.5.1/install.sh | sh
+      source ~/.nvm/nvm.sh
+      nvm install "${TRAVIS_NODE_VERSION}"
+      nvm use "${TRAVIS_NODE_VERSION}"
+    fi
   - node --version
