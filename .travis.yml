@@ -16,7 +16,8 @@ before_install:
   - echo $TRAVIS_NODE_VERSION
   - echo "${TRAVIS_NODE_VERSION}"
   - |
-    if [ "${TRAVIS_NODE_VERSION}" != "0.4" ] then
+    if [ "${TRAVIS_NODE_VERSION}" != "0.4" ]
+    then
       rm -rf ~/.nvm
       wget -qO- https://raw.github.com/creationix/nvm/v0.5.1/install.sh | sh
       source ~/.nvm/nvm.sh
