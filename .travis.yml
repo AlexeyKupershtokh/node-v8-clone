@@ -19,6 +19,6 @@ before_install:
   - rm -rf ~/.nvm
   - wget -qO- https://raw.github.com/creationix/nvm/v0.5.1/install.sh | sh
   - source ~/.nvm/nvm.sh
-  - nvm install "${TRAVIS_NODE_VERSION}"
-  - nvm use "${TRAVIS_NODE_VERSION}"
+  - '[ "${TRAVIS_NODE_VERSION}" != "0.4" ] || nvm install "${TRAVIS_NODE_VERSION}"'
+  - '[ "${TRAVIS_NODE_VERSION}" != "0.4" ] || nvm use "${TRAVIS_NODE_VERSION}"'
   - node --version
