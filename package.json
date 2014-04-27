@@ -6,6 +6,7 @@
   "scripts": {
     "test": "node_modules/.bin/mocha -R spec test/test.js",
     "test-3rdparty": "node_modules/.bin/mocha -R spec test/3rdparty.js --colors 2>/dev/null; exit 0",
+    "benchmark-prepare": "npm install benchmark cloneextend clone lodash underscore owl-deepcopy benchmark.js-plot",
     "benchmark": "node bench/arrays.js; node bench/class.js; node bench/date.js; node bench/deep.js; node bench/deep_array.js; node bench/number.js; node bench/object.js; node bench/regexp.js",
     "install": "node-gyp rebuild"
   },
@@ -28,16 +29,10 @@
   "gypfile": true,
   "readmeFilename": "README.md",
   "dependencies": {
-    "bindings": "~1.2"
+    "bindings": "~1.2",
+    "nan": "*"
   },
   "devDependencies": {
-    "benchmark": "*",
-    "mocha": "*",
-    "cloneextend": "*",
-    "clone": "*",
-    "lodash": "*",
-    "underscore": "*",
-    "benchmark.js-plot": "0.1.2",
-    "owl-deepcopy": "*"
+    "mocha": "*"
   }
 }

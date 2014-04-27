@@ -8,6 +8,8 @@ It's also very fast in some cases (benchmarks inside).
 ### Installation:
 
 Tested on node.js versions 0.4, 0.6. 0.8, 0.9 and 0.10.
+It's also partially compatible with node 0.11: it works well with 0.11.3, 0.11.4 and 0.11.12 but doesn't work with all other versions so far. 
+
 You may be asked to install `make` and `g++` as well.
 ```
 npm install node-v8-clone
