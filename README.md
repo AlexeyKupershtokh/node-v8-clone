@@ -65,6 +65,7 @@ $ npm test
 
 To run tests for 3rdparty modules run:
 ```
+$ npm run-script benchmark-prepare
 $ npm run-script test-3rdparty
 ```
 
