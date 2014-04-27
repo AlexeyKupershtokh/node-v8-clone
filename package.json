@@ -29,10 +29,10 @@
   "gypfile": true,
   "readmeFilename": "README.md",
   "dependencies": {
-    "bindings": "~1.2"
+    "bindings": "~1.2",
+    "nan": "*"
   },
   "devDependencies": {
-    "mocha": "*",
-    "nan": "*"
+    "mocha": "*"
   }
 }
