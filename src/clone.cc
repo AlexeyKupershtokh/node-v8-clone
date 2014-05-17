@@ -18,7 +18,7 @@ NAN_METHOD(Clone) {
 
 void Init(Handle<Object> target) {
   target->Set(NanSymbol("clone"),
-      FunctionTemplate::New(Clone)->GetFunction());
+      NanNew<FunctionTemplate>(Clone)->GetFunction());
 }
 
 NODE_MODULE(clone, Init)
