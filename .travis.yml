@@ -10,10 +10,12 @@ node_js:
   - "0.11.10"
   - "0.11.11"
   - "0.11.12"
+  - "0.11.13"
 matrix:
   allow_failures:
     - node_js: "0.11.10"
     - node_js: "0.11.11"
+    - node_js: "0.11.13"
 before_install:
   - echo $TRAVIS_NODE_VERSION
   - echo "${TRAVIS_NODE_VERSION}"
