@@ -1,8 +1,5 @@
 language: node_js
 env:
-  - NODE_VERSION="0.4"
-  - NODE_VERSION="0.4"
-  - NODE_VERSION="0.6"
   - NODE_VERSION="0.8"
   - NODE_VERSION="0.9"
   - NODE_VERSION="0.10"
