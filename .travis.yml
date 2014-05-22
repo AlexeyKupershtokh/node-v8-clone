@@ -3,18 +3,9 @@ env:
   - NODE_VERSION="0.8"
   - NODE_VERSION="0.9"
   - NODE_VERSION="0.10"
-  - NODE_VERSION="0.11.3"
-  - NODE_VERSION="0.11.4"
-  - NODE_VERSION="0.11.10"
-  - NODE_VERSION="0.11.11"
-  - NODE_VERSION="0.11.12"
   - NODE_VERSION="0.11.13"
 node_js:
   - "0.10"
-matrix:
-  allow_failures:
-    - env: NODE_VERSION="0.11.10"
-    - env: NODE_VERSION="0.11.11"
 before_install:
   - echo $NODE_VERSION
   - rm -rf ~/.nvm
