@@ -1,6 +1,6 @@
 {
   "name": "node-v8-clone",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "The most convenient and accurate cloner for node.js. It's also very fast in some cases (benchmarks inside).",
   "main": "lib/clone.js",
   "scripts": {
@@ -30,7 +30,7 @@
   "readmeFilename": "README.md",
   "dependencies": {
     "bindings": "~1.2",
-    "nan": "*"
+    "nan": "~1.0"
   },
   "devDependencies": {
     "mocha": "*"
