@@ -17,7 +17,7 @@ NAN_METHOD(Clone) {
 }
 
 void Init(Handle<Object> target) {
-  target->Set(NanSymbol("clone"),
+  target->Set(NanNew<String>("clone"),
       NanNew<FunctionTemplate>(Clone)->GetFunction());
 }
 
