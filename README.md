@@ -71,3 +71,10 @@ $ npm run-script test-3rdparty
 Test results are available [here](https://github.com/AlexeyKupershtokh/node-v8-clone/wiki/Test-results).
 
 Also you may want to check the [module's page at Travis CI](https://travis-ci.org/AlexeyKupershtokh/node-v8-clone).
+
+### Possible installation issues:
+```
+/bin/sh: 1: node: not found
+gyp: Call to 'node -e "require('nan')"' returned exit status 127. while trying to load binding.gyp
+```
+In this case make sure your nodejs is globally accessible by the name `node`. Optionally you may want to install `nodejs-legacy` package under Ubuntu.
