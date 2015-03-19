@@ -17,17 +17,17 @@ npm install node-v8-clone
 ### Usage:
 
 ```javascript
-var clone = require('node-v8-clone').clone;
+var clone = require('node-v8-clone');
+var shallowClone = clone.shallowClone;
+var deepClone = clone.deepClone;
 var a = { x: { y: {} } };
 
-// deep clone
-var b = clone(a, true);
+var b = deepClone(a);
 a === b // false
 a.x === b.x // false
 a.x.y === b.x.y // false
 
-// shallow clone
-var c = clone(a, false);
+var c = shallowClone(a);
 a === c // false
 a.x === c.x // true
 a.x.y === c.x.y // true
