@@ -11,8 +11,8 @@ regular = function(obj) { var result = {}; for(var i in obj) result[i] = obj[i];
 // regular cloner with own checks
 regular_own = function(obj) { var result = {}; for(var i in obj) if (obj.hasOwnProperty(i)) result[i] = obj[i]; return result; };
 
-// regular cloner with own checks
-regular_keys = function(obj) { var result = {}; var props = Object.keys(obj); for(var i = 0, l = props.length; i < l; i++) result[i] = obj[i]; return result; };
+// cloner with own checks through Object.keys()
+regular_keys = function(obj) { var result = {}; var props = Object.keys(obj); for(var i = 0, l = props.length; i < l; i++) result[props[i]] = obj[props[i]]; return result; };
 
 var Cloner = require('..').Cloner;
 cloner = new Cloner(false);
