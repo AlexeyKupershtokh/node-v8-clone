@@ -30,7 +30,7 @@
   "readmeFilename": "README.md",
   "dependencies": {
     "bindings": "~1.2",
-    "nan": "~1.5"
+    "nan": "~2.1"
   },
   "devDependencies": {
     "mocha": "*"

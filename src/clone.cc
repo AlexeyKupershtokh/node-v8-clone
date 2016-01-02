@@ -7,18 +7,20 @@
 using namespace v8;
 
 NAN_METHOD(Clone) {
-  NanScope();
-  Handle<Value>arg = args[0];
+  Handle<Value>arg = info[0];
   if (arg->IsObject()) {
     Handle<Object>obj = Handle<Object>::Cast(arg);
-    NanReturnValue(obj->Clone());
+    info.GetReturnValue().Set(obj->Clone());
   }
-  NanReturnValue(arg);
+  info.GetReturnValue().Set(arg);
 }
 
-void Init(Handle<Object> target) {
-  target->Set(NanNew<String>("clone"),
-      NanNew<FunctionTemplate>(Clone)->GetFunction());
+NAN_MODULE_INIT(Init) {
+  Nan::Set(
+    target,
+    Nan::New<v8::String>("clone").ToLocalChecked(),
+    Nan::GetFunction(Nan::New<v8::FunctionTemplate>(Clone)).ToLocalChecked()
+  );
 }
 
 NODE_MODULE(clone, Init)
