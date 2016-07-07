@@ -6,24 +6,21 @@
 
 using namespace v8;
 
-#define NanReturnValue(x) info.GetReturnValue().Set(x); return
-#define NanScope() Nan::HandleScope scope
-#define NanNew Nan::New
-#define NanReturnNull() NanReturnValue(Nan::Null())
-
 NAN_METHOD(Clone) {
-  NanScope();
-  Handle<Value> arg = info[0];
+  Nan::HandleScope scope;
+  Local<Value> arg = info[0];
   if (arg->IsObject()) {
     Handle<Object>obj = Handle<Object>::Cast(arg);
-    NanReturnValue(obj->Clone());
+    Local<Object> cloned = obj->Clone();
+    info.GetReturnValue().Set(cloned);
+    return;
   }
-  NanReturnValue(arg);
+  info.GetReturnValue().Set(arg);
 }
 
 void Init(Handle<Object> target) {
-  target->Set(NanNew<String>("clone").ToLocalChecked(),
-      NanNew<FunctionTemplate>(Clone)->GetFunction());
+  target->Set(Nan::New<String>("clone").ToLocalChecked(),
+      Nan::New<FunctionTemplate>(Clone)->GetFunction());
 }
 
 NODE_MODULE(clone, Init)
