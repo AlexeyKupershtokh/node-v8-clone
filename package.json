@@ -30,7 +30,7 @@
   "readmeFilename": "README.md",
   "dependencies": {
     "bindings": "~1.2",
-    "nan": "2.3.3",
+    "nan": "2.3.5",
     "node-gyp" : "latest"
   },
   "devDependencies": {
