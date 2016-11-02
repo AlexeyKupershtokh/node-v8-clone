@@ -10,9 +10,9 @@ NAN_METHOD(Clone) {
   Handle<Value>arg = info[0];
   if (arg->IsObject()) {
     Handle<Object>obj = Handle<Object>::Cast(arg);
-    info.GetReturnValue().Set(obj->Clone());
+    return info.GetReturnValue().Set(obj->Clone());
   }
-  info.GetReturnValue().Set(arg);
+  return info.GetReturnValue().Set(arg);
 }
 
 NAN_MODULE_INIT(Init) {
